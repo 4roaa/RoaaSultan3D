@@ -394,6 +394,29 @@
   transform:translateY(-3px);
   box-shadow:0 10px 30px #8b5cf680;
 }
+.work-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #ddd6fe;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.work-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #93c5fd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.work-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #3b82f6;
+}
 
     @keyframes pop {
       0% { opacity: 0; transform: scale(0.8); }
@@ -549,6 +572,11 @@
           <br/>
           <a href="excel-kfmc-2026.pdf" target="_blank" style="color:#60a5fa;">
             🔍 View Certificate
+          </a>
+          &nbsp;|&nbsp;
+          <a href="excel-kfmc-2026.pdf" download style="color:#93c5fd;">
+            ⬇ Download
+          </a>
         </li>
       </ul>
 
@@ -597,6 +625,49 @@
         </div>
       </div>
     </section>
+
+    <!-- PORTFOLIO / MY WORK -->
+<section id="portfolio" class="section">
+  <h2 class="section-title fade">🎨 Portfolio & UI Work</h2>
+
+  <div class="summary-card fade">
+    A selected showcase of my UI/UX designs, web interfaces, dashboards, and other digital projects. 
+    These works reflect my ability to design clean, user-friendly, and modern digital experiences.
+  </div>
+
+  <div class="cards">
+    <div class="card fade">
+      <span class="work-badge">UI / UX Design</span>
+      <h3>Healthcare Dashboard UI</h3>
+      <p>
+        Modern dashboard interface designed for healthcare systems, focusing on clarity, usability,
+        data visualization, and professional medical-style layouts.
+      </p>
+      <a href="UI+UX Design.pdf" class="work-link">View Work →</a>
+    </div>
+
+    <div class="card fade">
+      <span class="work-badge">Web Interface</span>
+      <h3>Roaahub Website UI</h3>
+      <p>
+        Responsive website interface for IoT and fleet management, featuring clean sections,
+        modern cards, smooth animations, and professional landing-page structure.
+      </p>
+      <a href="https://roaahub-frontend.vercel.app/" class="work-link">View Work →</a>
+    </div>
+
+    <div class="card fade">
+  <span class="work-badge">✨ Personal Work | 3D Web Design</span>
+  <h3>Professional 3D Website</h3>
+  <p>
+    This project was entirely designed and developed by <strong style="color: #c9a96e;">Ruaa Sultan</strong> to showcase skills in creative design and advanced programming. The work is <strong>for display only</strong> and not for commercial use.
+  </p>
+  <a href="3dWebsite.html" class="work-link">View Work →</a>
+</div>
+
+
+  </div>
+</section>
 
     <!-- SKILLS -->
     <section id="skills" class="section">
