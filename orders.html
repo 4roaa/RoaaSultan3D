@@ -1,0 +1,307 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Refresh.ai - سجل الطلبات</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-fixed-dim": "#98da27",
+                    "surface-variant": "#e0e3e5",
+                    "secondary": "#006591",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-fixed": "#ffddb8",
+                    "primary-container": "#a3e635",
+                    "on-secondary-fixed": "#001e2f",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#805000",
+                    "on-surface-variant": "#424936",
+                    "on-primary-fixed-variant": "#334f00",
+                    "inverse-primary": "#98da27",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary": "#855300",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "on-primary-container": "#416400",
+                    "surface-container": "#eceef0",
+                    "tertiary-container": "#ffc989",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-container": "#004666",
+                    "on-primary-fixed": "#121f00",
+                    "secondary-container": "#39b8fd",
+                    "outline-variant": "#c2cab0",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed": "#c9e6ff",
+                    "outline": "#727a64",
+                    "surface-dim": "#d8dadc",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#2a1700",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "surface": "#f7f9fb",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#446900",
+                    "primary-fixed": "#b2f746",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "primary": "#446900"
+            },
+            "fontFamily": {
+                    "headline-md": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "body-md": ["Inter", "Noto Sans Arabic"],
+                    "body-lg": ["Inter", "Noto Sans Arabic"],
+                    "headline-lg": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "display-lg": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "label-md": ["Inter", "Noto Sans Arabic"],
+                    "caption": ["Inter", "Noto Sans Arabic"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      
+      .mesh-bg {
+        background-color: #f7f9fb;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(163, 230, 53, 0.15) 0px, transparent 50%),
+          radial-gradient(at 100% 0%, rgba(57, 184, 253, 0.15) 0px, transparent 50%),
+          radial-gradient(at 50% 100%, rgba(163, 230, 53, 0.1) 0px, transparent 50%);
+      }
+
+      .status-delivered {
+        background: rgba(163, 230, 53, 0.2);
+        color: #416400;
+        border: 1px solid rgba(163, 230, 53, 0.3);
+      }
+
+      .status-processing {
+        background: rgba(57, 184, 253, 0.2);
+        color: #004666;
+        border: 1px solid rgba(57, 184, 253, 0.3);
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#a3e635">
+<style id="refresh-ai-utility-fixes">
+  .px-margin-mobile{padding-left:16px;padding-right:16px}
+  .px-gutter{padding-left:24px;padding-right:24px}
+  .py-base{padding-top:8px;padding-bottom:8px}
+  .max-w-container-max{max-width:1280px}
+  .text-caption{font-size:.75rem;line-height:1rem}
+  .text-label-md{font-size:.875rem;line-height:1.25rem}
+  .text-body-md{font-size:1rem;line-height:1.5rem}
+  .text-body-lg{font-size:1.125rem;line-height:1.75rem}
+  .text-headline-md{font-size:1.25rem;line-height:1.75rem}
+  .text-headline-lg{font-size:1.5rem;line-height:2rem}
+  .text-display-lg-mobile{font-size:2.25rem;line-height:2.5rem}
+  .text-display-lg{font-size:3.5rem;line-height:1}
+  .font-caption{font-family:Inter,'Noto Sans Arabic',sans-serif}
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  .line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  @media (min-width:768px){
+    .md\:px-margin-desktop{padding-left:40px;padding-right:40px}
+    .md\:text-display-lg{font-size:3.5rem;line-height:1}
+  }
+</style>
+</head>
+<body class="mesh-bg min-h-screen font-body-md text-on-surface">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<button class="transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-primary/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Refresh.ai</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-primary/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="mb-8">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-2">سجل الطلبات</h2>
+<p class="text-on-surface-variant font-body-lg">تابع انتعاشك وتفاصيل مشترياتك السابقة</p>
+</div>
+<!-- Order List -->
+<div class="space-y-6">
+<!-- Order Card 1 (Delivered) -->
+<div class="glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="flex flex-col md:flex-row justify-between gap-6">
+<div class="flex gap-4">
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A high-resolution close-up of a premium hydration bottle with condensation droplets on its surface, containing a vibrant green lime and mint infused water. The background is a soft blur of a modern kitchen, using the Refresh.ai signature electric citrus and clean white color palette to evoke a sense of high-performance refreshment and digital clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWtAB5K2_K0M9-a7olQLe_Jix_jMK8OO6QYB2pLov7sIRv7CVSa3Mg7MYwwSRop9HUlxH-OXVfLZvYDbR0ELTr_uL9fcbNbhvy4jDD3Km3GC0TK6pgIbC-StjRc4kRt5kUTUftRbTW7FAh09go07HPwdvWa5iBEtLkUz4pCcFzKVmilpb11yd1rLSmTPyGVR4zPLQ-WxZkql5fS4Ev-0glfjZU6KIjjVjpzS4AGkWef8rghkwnbZaZ8EiLegco3JevoNgHY4LuMZWP">
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-primary mb-1">انتعاش الليمون والنعناع</h3>
+<p class="text-caption text-on-surface-variant">طلب رقم: #REF-82910</p>
+<p class="text-caption text-on-surface-variant">12 أكتوبر 2023 | 04:30 م</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="status-delivered px-3 py-1 rounded-full text-label-md font-semibold">تم التسليم</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col justify-between items-end gap-2 border-t md:border-t-0 md:border-r border-outline-variant pt-4 md:pt-0 md:pr-6">
+<div class="text-right">
+<p class="text-caption text-on-surface-variant mb-1">السعر الإجمالي</p>
+<p class="font-headline-md text-primary">24.50 ر.س</p>
+</div>
+<div class="flex items-center gap-1 bg-primary-container/30 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-on-primary-container font-label-md">+45 نقطة</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="flex-1 py-2 px-4 rounded-full bg-primary text-on-primary font-label-md transition-all hover:opacity-90 active:scale-95">إعادة الطلب</button>
+<button class="flex-1 py-2 px-4 rounded-full border border-primary text-primary font-label-md transition-all hover:bg-primary/5 active:scale-95">التفاصيل</button>
+</div>
+</div>
+<!-- Order Card 2 (Processing) -->
+<div class="glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="flex flex-col md:flex-row justify-between gap-6">
+<div class="flex gap-4">
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional product shot of an electrolyte drink in a clear, sleek glass with ice cubes and floating orange slices. The liquid is a glowing citrus orange color. The style is modern glassmorphism with soft background blurs, reflecting a tech-savvy health brand aesthetic, featuring sharp lighting and fresh textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpa-XTEQ0m5wk6CWYvCdtYbkLyGPULh5TUmDR3qiwzZjlSiV72WpyWfSvpvrQqSfDS1cxu1osUjt0NNYeV63OVSBz_2tVmReU-FoZz7qCd2PgKyZszXTN2Pn2Dx5TAsBfWRIy-Kmgz70KJh64w_8UmN1pIHUdDIfNrYmUnJ1lq0kNSmjPxYlh71qfo9yvsgkMGDWxoUkeCv5NMX7Qok08wIQ8gzxSKHu1Kvt0xodw2xr7TKu0SCKCAa0AnZZsiTUt0z5hO9pzXPtj-">
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-primary mb-1">مزيج الطاقة الحمضي</h3>
+<p class="text-caption text-on-surface-variant">طلب رقم: #REF-82955</p>
+<p class="text-caption text-on-surface-variant">اليوم | 09:15 ص</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="status-processing px-3 py-1 rounded-full text-label-md font-semibold">جاري التجهيز</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col justify-between items-end gap-2 border-t md:border-t-0 md:border-r border-outline-variant pt-4 md:pt-0 md:pr-6">
+<div class="text-right">
+<p class="text-caption text-on-surface-variant mb-1">السعر الإجمالي</p>
+<p class="font-headline-md text-primary">32.00 ر.س</p>
+</div>
+<div class="flex items-center gap-1 bg-primary-container/30 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-on-primary-container font-label-md">+60 نقطة</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="flex-1 py-2 px-4 rounded-full bg-secondary-container text-on-secondary-container font-label-md transition-all hover:opacity-90 active:scale-95">تتبع الطلب</button>
+<button class="flex-1 py-2 px-4 rounded-full border border-outline text-on-surface-variant font-label-md transition-all hover:bg-surface-variant active:scale-95">التفاصيل</button>
+</div>
+</div>
+<!-- Order Card 3 (Delivered) -->
+<div class="glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="flex flex-col md:flex-row justify-between gap-6">
+<div class="flex gap-4">
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="An artistic composition of a cooling blue hydration beverage in a frosted glass bottle, set against a backdrop of soft, abstract blue and white light patterns. The image emphasizes freshness and temperature, with crisp details on the frosted surface and a minimalist, premium tech feel characteristic of a high-end wellness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATfOmrvSP4IUzOZ7xsey5vORuwxQmV7IrqP-QZ7jSPXfuCdi1moR5yKd8GVpmJi9J65dvSd22k7aras5_pBajbevjFZWaGOfWJkxQ0HLXpZfgXsZfwC-U5AZ8g5Mj64wN6zfRVCxLEPc30f-8OA66RWdDUdnTjz1TqS2iHWZh4R4J4ePmYNm3gNog97LhTR4XJwUk6zi4GWTGkGmX8N-4NyUb_w_RG9QKLAihaU8LyPOMr7NWeOc4gMJKU2IEDG5pRlSD8vOt7CFSm">
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-primary mb-1">مبرد التوت الأزرق</h3>
+<p class="text-caption text-on-surface-variant">طلب رقم: #REF-82801</p>
+<p class="text-caption text-on-surface-variant">08 أكتوبر 2023 | 11:20 ص</p>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="status-delivered px-3 py-1 rounded-full text-label-md font-semibold">تم التسليم</span>
+</div>
+</div>
+</div>
+<div class="flex md:flex-col justify-between items-end gap-2 border-t md:border-t-0 md:border-r border-outline-variant pt-4 md:pt-0 md:pr-6">
+<div class="text-right">
+<p class="text-caption text-on-surface-variant mb-1">السعر الإجمالي</p>
+<p class="font-headline-md text-primary">18.00 ر.س</p>
+</div>
+<div class="flex items-center gap-1 bg-primary-container/30 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-on-primary-container font-label-md">+30 نقطة</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex gap-3">
+<button class="flex-1 py-2 px-4 rounded-full bg-primary text-on-primary font-label-md transition-all hover:opacity-90 active:scale-95">إعادة الطلب</button>
+<button class="flex-1 py-2 px-4 rounded-full border border-primary text-primary font-label-md transition-all hover:bg-primary/5 active:scale-95">التفاصيل</button>
+</div>
+</div>
+</div>
+<!-- Load More Section -->
+<div class="mt-12 text-center">
+<button class="px-8 py-3 rounded-full border-2 border-primary-container text-primary font-headline-md hover:bg-primary-container transition-all active:scale-95">عرض المزيد من الطلبات</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/70 backdrop-blur-2xl border-t border-white/20 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center py-base px-gutter h-20 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90 hover:bg-white/10" href="index.html">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-label-md font-label-md">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90 hover:bg-white/10" href="smart-dispenser.html">
+<span class="material-symbols-outlined mb-1">explore</span>
+<span class="text-label-md font-label-md">استكشف</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/80 text-on-primary-container rounded-full px-4 py-1.5 backdrop-blur-md transition-transform duration-200 active:scale-90" href="orders.html">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="text-label-md font-label-md">المحفظة</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90 hover:bg-white/10" href="profile.html">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-label-md font-label-md">الملف</span>
+</a>
+</nav>
+<!-- Animated Shader Background (Subtle layer behind content) -->
+<div class="fixed inset-0 -z-10 opacity-30 pointer-events-none">
+
+</div>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px) scale(1.01)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body></html>

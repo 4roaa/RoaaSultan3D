@@ -1,0 +1,25 @@
+{
+  "name": "Refresh.ai - Smart Hydration Platform",
+  "short_name": "Refresh.ai",
+  "description": "Smart hydration platform for managing beverage orders, tracking loyalty points, and finding smart dispensers.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fb",
+  "theme_color": "#a3e635",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

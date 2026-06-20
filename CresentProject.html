@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport" />
+    <title>Cresent - المنصة الصحية المتكاملة</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0F172A",
+                        "primary-light": "#334155",
+                        "accent-blue": "#135bec",
+                        "accent-gold": "#fea619",
+                        "surface": "#f7f9fb",
+                        "surface-container": "#ffffff",
+                        "text-main": "#0f172a",
+                        "text-secondary": "#64748b",
+                        "border-light": "#e2e8f0",
+                        "success": "#10b981",
+                        "warning": "#f59e0b",
+                        "error": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "4px",
+                        "sm": "2px",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "2xl": "16px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f7f9fb;
+            min-height: 100dvh;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        body.dark .bg-surface-container {
+            background-color: #1e293b !important;
+        }
+        body.dark .bg-surface {
+            background-color: #0f172a !important;
+        }
+        body.dark .border-border-light {
+            border-color: #334155 !important;
+        }
+        body.dark .glass,
+        body.dark .glass-card {
+            background: rgba(30, 41, 59, 0.7) !important;
+            border-color: rgba(71, 85, 105, 0.3) !important;
+        }
+        body.dark .text-text-secondary {
+            color: #94a3b8 !important;
+        }
+        body.dark .bg-slate-50 {
+            background-color: #1e293b !important;
+        }
+        body.dark .bg-slate-100 {
+            background-color: #334155 !important;
+        }
+        body.dark .bg-white {
+            background-color: #1e293b !important;
+        }
+        body.dark .bg-slate-200 {
+            background-color: #334155 !important;
+        }
+        body.dark .hover\:bg-slate-50:hover {
+            background-color: #334155 !important;
+        }
+        body.dark .hover\:bg-slate-100:hover {
+            background-color: #334155 !important;
+        }
+        body.dark .bg-surface-container\/80 {
+            background-color: rgba(30, 41, 59, 0.8) !important;
+        }
+        body.dark .bg-surface-container\/90 {
+            background-color: rgba(30, 41, 59, 0.9) !important;
+        }
+        body.dark .bg-primary\/5 {
+            background-color: rgba(19, 91, 236, 0.15) !important;
+        }
+        body.dark .bg-primary\/10 {
+            background-color: rgba(19, 91, 236, 0.2) !important;
+        }
+        body.dark .border-slate-100 {
+            border-color: #334155 !important;
+        }
+        body.dark .border-slate-200 {
+            border-color: #334155 !important;
+        }
+        body.dark .text-slate-500,
+        body.dark .text-slate-400 {
+            color: #94a3b8 !important;
+        }
+        body.dark .text-slate-600 {
+            color: #cbd5e1 !important;
+        }
+        body.dark .bg-slate-50\/80 {
+            background-color: rgba(30, 41, 59, 0.8) !important;
+        }
+        body.dark .bg-inverse-surface {
+            background-color: #1e293b !important;
+        }
+        body.dark .text-inverse-on-surface {
+            color: #e2e8f0 !important;
+        }
+
+        /* ===== GLASS EFFECTS ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        }
+        body.dark .glass-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== ICONS ===== */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            line-height: 1;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* ===== PAGE TRANSITIONS ===== */
+        .page {
+            display: none;
+            animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding-bottom: 110px;
+        }
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(24px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== BOTTOM NAV ===== */
+        .nav-btn {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+            padding: 4px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+        }
+        .nav-btn:hover {
+            transform: scale(1.05);
+        }
+        .nav-btn:active {
+            transform: scale(0.92);
+        }
+        .nav-btn.active-nav .nav-icon {
+            background: #0F172A;
+            color: white;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.25);
+            transform: scale(1.05);
+        }
+        body.dark .nav-btn.active-nav .nav-icon {
+            background: #135bec;
+            box-shadow: 0 4px 20px rgba(19, 91, 236, 0.3);
+        }
+        .nav-btn.active-nav .nav-label {
+            color: #0F172A;
+            font-weight: 800;
+        }
+        body.dark .nav-btn.active-nav .nav-label {
+            color: #e2e8f0;
+        }
+        .nav-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+            color: #64748b;
+        }
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            margin-top: 2px;
+            line-height: 1.2;
+        }
+
+        /* ===== STATUS BADGES ===== */
+        .status-pill {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 4px;
+            text-transform: capitalize;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .status-approved {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        .status-draft {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+        body.dark .status-approved {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        body.dark .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        body.dark .status-draft {
+            background: rgba(71, 85, 105, 0.3);
+            color: #94a3b8;
+            border-color: rgba(71, 85, 105, 0.3);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        body.dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* ===== SIDEBAR ===== */
+        #sidebar {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(100%);
+            will-change: transform;
+        }
+        #sidebar.open {
+            transform: translateX(0);
+        }
+        #overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            will-change: opacity;
+        }
+        #overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ===== FORM INPUTS ===== */
+        .input-field {
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 12px 16px;
+            background: white;
+            font-size: 14px;
+            color: #0f172a;
+            font-family: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .input-field:focus {
+            border-color: #0F172A;
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+            outline: none;
+        }
+        body.dark .input-field {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        body.dark .input-field:focus {
+            border-color: #135bec;
+            box-shadow: 0 0 0 3px rgba(19, 91, 236, 0.15);
+        }
+        .input-field::placeholder {
+            color: #94a3b8;
+        }
+        body.dark .input-field::placeholder {
+            color: #64748b;
+        }
+        select.input-field {
+            padding-right: 44px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            background-size: 20px;
+        }
+        body.dark select.input-field {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        }
+
+        /* ===== METRIC CARDS ===== */
+        .metric-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+        }
+        body.dark .metric-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RIPPLE EFFECT ===== */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            width: 100px;
+            height: 100px;
+            margin-top: -50px;
+            margin-left: -50px;
+            top: 50%;
+            left: 50%;
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .ripple:active::after {
+            animation: rippleAnim 0.6s ease-out;
+        }
+        @keyframes rippleAnim {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ===== COUNTER ANIMATION ===== */
+        .counter-number {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== NOTIFICATION TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            left: 20px;
+            z-index: 1000;
+            transform: translateY(120%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .toast.show {
+            transform: translateY(0);
+        }
+        .toast-success {
+            border-right: 4px solid #10b981;
+        }
+        .toast-warning {
+            border-right: 4px solid #f59e0b;
+        }
+        .toast-info {
+            border-right: 4px solid #135bec;
+        }
+        body.dark .toast {
+            background: rgba(30, 41, 59, 0.95) !important;
+        }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            transform: rotate(30deg) scale(1.1);
+        }
+        .theme-toggle:active {
+            transform: rotate(60deg) scale(0.9);
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+            animation: floatParticle 20s infinite ease-in-out;
+        }
+        @keyframes floatParticle {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(30px, -40px) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, -80px) scale(0.9);
+            }
+            75% {
+                transform: translate(40px, -30px) scale(1.05);
+            }
+        }
+
+        /* ===== RESPONSIVE UTILITIES ===== */
+        .container-responsive {
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        @media (min-width: 640px) {
+            .container-responsive {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container-responsive {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+        }
+
+        /* ===== IMAGE RESPONSIVE ===== */
+        .img-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== GRID RESPONSIVE ===== */
+        .grid-responsive {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 640px) {
+            .grid-responsive {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .grid-responsive {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ===== SAFE AREA ===== */
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        /* ===== HIDE SCROLLBAR ===== */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===== ANIMATED GRADIENT ===== */
+        .animated-gradient {
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- FLOATING PARTICLES -->
+    <!-- ============================================================ -->
+    <div class="particle w-64 h-64 bg-accent-blue/5 top-10 left-10" style="animation-delay: 0s;"></div>
+    <div class="particle w-96 h-96 bg-accent-gold/5 bottom-20 right-10" style="animation-delay: -5s;"></div>
+    <div class="particle w-48 h-48 bg-primary/5 top-1/2 left-1/2" style="animation-delay: -10s;"></div>
+
+    <!-- ============================================================ -->
+    <!-- NOTIFICATION TOAST -->
+    <!-- ============================================================ -->
+    <div id="toast" class="toast glass-card rounded-xl p-4 shadow-2xl toast-info">
+        <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-accent-blue text-2xl flex-shrink-0">info</span>
+            <div class="flex-1 min-w-0">
+                <p class="font-bold text-primary dark:text-white text-sm truncate" id="toastTitle">مرحباً بك!</p>
+                <p class="text-text-secondary dark:text-slate-400 text-xs mt-0.5 break-words" id="toastMessage">تم تحميل المنصة بنجاح</p>
+            </div>
+            <button onclick="hideToast()" class="text-text-secondary hover:text-primary dark:hover:text-white transition-colors flex-shrink-0 p-1">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TOP APP BAR -->
+    <!-- ============================================================ -->
+    <header class="fixed top-0 w-full z-50 bg-surface-container/80 backdrop-blur-xl border-b border-border-light shadow-sm flex items-center justify-between px-4 h-16 transition-colors duration-300">
+        <div class="flex items-center gap-2 min-w-0">
+            <button id="menuBtn" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-90 flex-shrink-0">
+                <span class="material-symbols-outlined text-primary dark:text-white">menu</span>
+            </button>
+            <a href="#" onclick="navigateTo('home')" class="flex items-center gap-2 group min-w-0">
+                <span class="material-symbols-outlined text-accent-blue text-2xl group-hover:rotate-12 transition-transform duration-500 flex-shrink-0">medical_services</span>
+                <span class="font-display text-xl font-extrabold text-primary dark:text-white tracking-tight truncate">Cresent</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            <button id="themeToggle" class="theme-toggle p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-90">
+                <span class="material-symbols-outlined text-text-secondary dark:text-white" id="themeIcon">dark_mode</span>
+            </button>
+            <button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-90 relative hidden sm:flex">
+                <span class="material-symbols-outlined text-text-secondary dark:text-white">notifications</span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border-2 border-white dark:border-slate-800 animate-pulse"></span>
+            </button>
+            <button class="hidden md:flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-slate-800 transition-all active:scale-95 dark:bg-accent-blue dark:hover:bg-blue-700">
+                <span class="material-symbols-outlined text-sm">logout</span>
+                <span class="hidden lg:inline">تسجيل الخروج</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- SIDEBAR NAVIGATION -->
+    <!-- ============================================================ -->
+    <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40" id="overlay" onclick="closeSidebar()"></div>
+    <aside class="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-surface-container shadow-2xl z-50 flex flex-col border-l border-border-light transition-colors duration-300" id="sidebar">
+        <div class="p-6 flex items-center justify-between border-b border-border-light">
+            <div class="flex items-center gap-2 text-primary dark:text-white font-black text-xl tracking-tighter">
+                <span class="material-symbols-outlined text-primary dark:text-white text-3xl animate-pulse">medical_services</span>
+                <span>CRESENT</span>
+            </div>
+            <button class="p-2 rounded-md text-text-secondary hover:text-primary dark:hover:text-white transition-colors" onclick="closeSidebar()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 rounded bg-primary text-white font-bold transition-all hover:bg-slate-800 dark:bg-accent-blue dark:hover:bg-blue-700" href="#" onclick="navigateTo('home'); closeSidebar();">
+                <span class="material-symbols-outlined">home</span>
+                <span>الرئيسية</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('dashboard'); closeSidebar();">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>لوحة التحكم</span>
+                <span class="mr-auto bg-primary/5 text-primary dark:bg-accent-blue/20 dark:text-accent-blue text-[10px] font-black px-2 py-0.5 rounded border border-primary/10 dark:border-accent-blue/20">4</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('staff'); closeSidebar();">
+                <span class="material-symbols-outlined">badge</span>
+                <span>الموظفين</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('education'); closeSidebar();">
+                <span class="material-symbols-outlined">school</span>
+                <span>التعليم الطبي</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('services'); closeSidebar();">
+                <span class="material-symbols-outlined">assignment_add</span>
+                <span>الخدمات العامة</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('evaluation'); closeSidebar();">
+                <span class="material-symbols-outlined">star</span>
+                <span>تقييم الدورة</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('sp-request'); closeSidebar();">
+                <span class="material-symbols-outlined">groups</span>
+                <span>طلب مريض قياسي</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('contact'); closeSidebar();">
+                <span class="material-symbols-outlined">support_agent</span>
+                <span>اتصل بالدعم</span>
+            </a>
+            <div class="pt-8 mt-8 border-t border-border-light px-4">
+                <p class="text-[10px] font-black text-text-secondary uppercase tracking-[0.15em] mb-4">إعدادات النظام</p>
+                <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>التفضيلات</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded text-text-secondary hover:bg-surface hover:text-primary dark:hover:bg-slate-800 dark:hover:text-white transition-all font-semibold" href="#" onclick="navigateTo('login'); closeSidebar();">
+                    <span class="material-symbols-outlined">login</span>
+                    <span>تسجيل الدخول</span>
+                </a>
+            </div>
+        </nav>
+        <div class="p-6 border-t border-border-light">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-full overflow-hidden border-2 border-accent-blue flex-shrink-0">
+                    <img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgSeQDZulWsI3GaAMuXgxaui_9bwhtFbRdM4dZZOAHfFw2qtBwzm2mnvaMInVlICjcGZZKIaKcwjtUCsSB_1Gdls9SCGnPRipMyMwYTk0954krVVpYZ6FPqbG8WyBAKsebAvNTuz4Oxcu9jPXwGAf0WW5eZybP78yDAY4vddRQMRLnxxcNKAyfuBXUXhfJ74zOvwOEBrkqbbC6Quv0gSNVeu3iwtQoUEhbJlvbTWyPjGliIo5JiTRqF5vgIQDS6Xg6phiNfeR3NycP" />
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-bold text-primary dark:text-white truncate">د. أحمد السالم</p>
+                    <p class="text-[10px] font-semibold text-text-secondary truncate uppercase tracking-wider">مدير النظام</p>
+                </div>
+                <button class="text-text-secondary hover:text-primary dark:hover:text-white transition-colors flex-shrink-0">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================================ -->
+    <main class="pt-16 container-responsive">
+
+        <!-- ========================================================== -->
+        <!-- PAGE: HOME (الرئيسية) -->
+        <!-- ========================================================== -->
+        <section id="page-home" class="page active">
+            <!-- Hero -->
+            <div class="py-4">
+                <div class="glass rounded-2xl p-4 sm:p-6 flex flex-col items-center text-center relative overflow-hidden border border-white/20 group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-accent-blue/5 via-transparent to-accent-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="w-full h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden mb-5 relative">
+                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Cresent Healthcare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsa87Wgynq5KV0ZxPLCvi01E-saKq0t_SUXPWcyu_jO-k2l1TU3I8exWQaqmVwP149ZHCI6C9x9H6voHz4wLYBpA3XYFw8EtUjjntQ2CBFzc4QqYME9PIDyqRscxXYGTCYuQ4-hLAOcEKvzvDK4qhez417fKyQrU4KW2QAkzw6ZEqSfHdvmQcy8lGDgBAusAP9UScBpXQODa7xxTdL1WVte6KSmF4JG5e_VU8E5v-p6DK_YyFLeZ6S9GbAGG6ZFzCHs5s7V8qwMBhd" loading="lazy" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 left-4">
+                            <span class="inline-block px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-accent-blue/90 text-white rounded-full backdrop-blur-sm">منصة متكاملة</span>
+                        </div>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-primary dark:text-white mb-2 leading-tight">منصة كريسينت الصحية</h2>
+                    <p class="text-text-secondary dark:text-slate-400 text-sm sm:text-base max-w-[280px] sm:max-w-md">إدارة متكاملة للخدمات الصحية والتعليم الطبي</p>
+                    <div class="flex flex-wrap justify-center gap-3 mt-5">
+                        <a href="#" onclick="navigateTo('dashboard')" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-primary/20 active:scale-95 transition-all inline-flex items-center gap-2 dark:bg-accent-blue dark:shadow-accent-blue/20">
+                            <span>لوحة التحكم</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                        <button onclick="showToast('info', 'مرحباً!', 'تم فتح المساعد الذكي')" class="border border-primary/20 text-primary dark:text-white dark:border-white/20 px-6 py-2.5 rounded-full font-bold text-sm hover:bg-primary/5 transition-all active:scale-95 inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">smart_toy</span>
+                            <span class="hidden xs:inline">المساعد الذكي</span>
+                            <span class="inline xs:hidden">مساعد</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center metric-card">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white"><span class="counter-number" data-target="142">0</span></p>
+                    <p class="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-1">طلبات نشطة</p>
+                    <span class="text-[10px] text-success font-bold">↑ +5%</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center metric-card">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white"><span class="counter-number" data-target="89">0</span></p>
+                    <p class="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-1">معتمدة</p>
+                    <span class="text-[10px] text-success font-bold">↑ +12%</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center metric-card">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white"><span class="counter-number" data-target="1204">0</span></p>
+                    <p class="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-1">تقييمات</p>
+                    <span class="text-[10px] text-success font-bold">↑ +3%</span>
+                </div>
+                <div class="glass-card rounded-xl p-3 sm:p-4 text-center metric-card">
+                    <p class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white"><span class="counter-number" data-target="4.8">0</span></p>
+                    <p class="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-1">متوسط التقييم</p>
+                    <span class="text-[10px] text-success font-bold">↑ +0.2</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="space-y-3 mb-6">
+                <h3 class="text-sm font-extrabold text-primary dark:text-white uppercase tracking-wider px-1 flex items-center gap-2">
+                    <span class="w-1 h-4 bg-accent-blue rounded-full"></span>
+                    الخدمات السريعة
+                </h3>
+                <a href="#" onclick="navigateTo('evaluation')" class="glass-card rounded-xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-accent-blue/10 text-accent-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-xl sm:text-2xl">star</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-primary dark:text-white text-sm sm:text-base truncate">تقييم الدورة</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">قدم ملاحظاتك على الدورات التدريبية</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </a>
+                <a href="#" onclick="navigateTo('sp-request')" class="glass-card rounded-xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-xl sm:text-2xl">groups</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-primary dark:text-white text-sm sm:text-base truncate">طلب مريض قياسي</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">احجز مرضى قياسيين للتدريب</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </a>
+                <a href="#" onclick="navigateTo('contact')" class="glass-card rounded-xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-xl sm:text-2xl">support_agent</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-primary dark:text-white text-sm sm:text-base truncate">اتصل بالدعم</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">احصل على مساعدة فورية</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </a>
+            </div>
+
+            <!-- System Notice -->
+            <div class="glass-card rounded-xl p-4 border-r-4 border-r-accent-gold mb-6">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-accent-gold flex-shrink-0">info</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold text-primary dark:text-white">صيانة النظام</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400">صيانة مجدولة يوم السبت من 12:00 صباحاً حتى 4:00 صباحاً</p>
+                        <div class="mt-2 h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-accent-gold rounded-full progress-fill" style="width: 75%"></div>
+                        </div>
+                        <p class="text-[10px] text-text-secondary dark:text-slate-400 mt-1">75% مكتمل</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: DASHBOARD (لوحة التحكم) -->
+        <!-- ========================================================== -->
+        <section id="page-dashboard" class="page">
+            <div class="pt-4 pb-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">لوحة التحكم</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">نظرة عامة على المقاييس التشغيلية</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 my-6">
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm metric-card dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">طلبات نشطة</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="142">0</span>
+                        <span class="text-success font-bold text-xs">+5%</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm metric-card dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">معتمدة</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="89">0</span>
+                        <span class="text-success font-bold text-xs">+12%</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm metric-card dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">تقييمات</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="1204">0</span>
+                        <span class="text-success font-bold text-xs">+3%</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm metric-card dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">متوسط التقييم</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="4.8">0</span>
+                        <span class="text-success font-bold text-xs">+0.2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="bg-surface-container p-4 sm:p-6 rounded-xl border border-border-light shadow-sm mb-6 dark:bg-slate-800 dark:border-slate-700">
+                <div class="flex flex-wrap justify-between items-start gap-2 mb-6">
+                    <div>
+                        <h3 class="text-sm font-extrabold text-primary dark:text-white uppercase tracking-wider">حجم النظام</h3>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 font-medium">اتجاهات التفاعل الشهرية</p>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-2xl font-extrabold text-primary dark:text-white tracking-tight">1,432</p>
+                        <div class="flex items-center gap-1 justify-end text-success">
+                            <span class="material-symbols-outlined text-sm">trending_up</span>
+                            <span class="text-[10px] font-extrabold">+8%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-44 w-full">
+                    <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 350 150">
+                        <defs>
+                            <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                                <stop offset="0%" stop-color="#135bec" stop-opacity="0.15" />
+                                <stop offset="100%" stop-color="#135bec" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+                        <line stroke="#f1f5f9" stroke-dasharray="4 4" x1="0" x2="350" y1="150" y2="150" />
+                        <line stroke="#f1f5f9" stroke-dasharray="4 4" x1="0" x2="350" y1="100" y2="100" />
+                        <line stroke="#f1f5f9" stroke-dasharray="4 4" x1="0" x2="350" y1="50" y2="50" />
+                        <path d="M0,120 C40,120 40,80 80,80 C120,80 120,110 160,100 C200,90 200,40 240,50 C280,60 280,30 350,20 V150 H0 Z" fill="url(#chartGradient)" />
+                        <path d="M0,120 C40,120 40,80 80,80 C120,80 120,110 160,100 C200,90 200,40 240,50 C280,60 280,30 350,20" fill="none" stroke="#135bec" stroke-linecap="round" stroke-width="2.5" />
+                        <circle class="fill-white stroke-accent-blue" cx="80" cy="80" r="3.5" stroke-width="2" />
+                        <circle class="fill-white stroke-accent-blue" cx="160" cy="100" r="3.5" stroke-width="2" />
+                        <circle class="fill-white stroke-accent-blue" cx="240" cy="50" r="3.5" stroke-width="2" />
+                        <circle class="fill-white stroke-accent-blue" cx="350" cy="20" r="3.5" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="flex flex-wrap justify-between mt-4 px-1 gap-1">
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">يناير</span>
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">فبراير</span>
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">مارس</span>
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">أبريل</span>
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">مايو</span>
+                    <span class="text-[10px] font-bold text-text-secondary dark:text-slate-400 uppercase">يونيو</span>
+                </div>
+            </div>
+
+            <!-- Recent Actions -->
+            <div class="bg-surface-container rounded-xl border border-border-light shadow-sm overflow-hidden dark:bg-slate-800 dark:border-slate-700">
+                <div class="px-4 sm:px-5 py-3 sm:py-4 border-b border-border-light flex justify-between items-center dark:border-slate-700">
+                    <h3 class="text-sm font-extrabold text-primary dark:text-white uppercase tracking-wider">الإجراءات الأخيرة</h3>
+                    <button class="text-accent-blue text-xs font-bold hover:underline" onclick="showToast('info', 'جميع الإجراءات', 'سيتم عرض جميع الإجراءات قريباً')">عرض الكل</button>
+                </div>
+                <ul class="divide-y divide-border-light dark:divide-slate-700">
+                    <li class="px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 hover:bg-surface dark:hover:bg-slate-700/50 transition-colors">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary dark:bg-accent-blue/20 dark:text-accent-blue flex-shrink-0">
+                            <span class="material-symbols-outlined text-lg">person_add</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-primary dark:text-white truncate">مستخدم جديد مسجل</p>
+                            <p class="text-xs text-text-secondary dark:text-slate-400 font-medium truncate">د. سارة سميث</p>
+                        </div>
+                        <span class="text-[10px] font-bold text-text-secondary dark:text-slate-500 flex-shrink-0">منذ 2 دقيقة</span>
+                    </li>
+                    <li class="px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 hover:bg-surface dark:hover:bg-slate-700/50 transition-colors">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-success/10 flex items-center justify-center text-success flex-shrink-0">
+                            <span class="material-symbols-outlined text-lg">check_circle</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-primary dark:text-white truncate">تم اعتماد الطلب #492</p>
+                            <p class="text-xs text-text-secondary dark:text-slate-400 font-medium truncate">فحص تلقائي</p>
+                        </div>
+                        <span class="text-[10px] font-bold text-text-secondary dark:text-slate-500 flex-shrink-0">منذ ساعة</span>
+                    </li>
+                    <li class="px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 hover:bg-surface dark:hover:bg-slate-700/50 transition-colors">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-warning/10 flex items-center justify-center text-warning flex-shrink-0">
+                            <span class="material-symbols-outlined text-lg">warning</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-primary dark:text-white truncate">تنبيه النظام: حمل مرتفع</p>
+                            <p class="text-xs text-text-secondary dark:text-slate-400 font-medium truncate">مجموعة الخوادم B</p>
+                        </div>
+                        <span class="text-[10px] font-bold text-text-secondary dark:text-slate-500 flex-shrink-0">منذ 3 ساعات</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: STAFF (الموظفين) -->
+        <!-- ========================================================== -->
+        <section id="page-staff" class="page">
+            <div class="pt-4 pb-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">لوحة الموظفين</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">إدارة المهام والطلبات</p>
+            </div>
+
+            <div class="bg-surface-container rounded-2xl border border-border-light p-4 sm:p-6 my-6 relative overflow-hidden dark:bg-slate-800 dark:border-slate-700">
+                <div class="absolute left-0 top-0 w-48 h-48 bg-primary/[0.02] rounded-full -ml-16 -mt-16"></div>
+                <div class="absolute right-0 bottom-0 w-32 h-32 bg-accent-blue/[0.02] rounded-full -mr-12 -mb-12"></div>
+                <div class="relative z-10">
+                    <div class="flex flex-wrap items-center gap-4 mb-4">
+                        <div class="h-12 w-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary dark:bg-accent-blue/20 dark:text-accent-blue animate-pulse flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl">library_add</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-xl font-extrabold text-primary dark:text-white">إضافة دورة جديدة</h3>
+                            <p class="text-text-secondary dark:text-slate-400 text-sm truncate">نشر وحدات تدريبية ومحتوى سريري</p>
+                        </div>
+                    </div>
+                    <button class="flex items-center justify-center gap-2 bg-primary hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-bold transition-all active:scale-[0.98] w-full dark:bg-accent-blue dark:hover:bg-blue-700 ripple">
+                        <span class="material-symbols-outlined text-[20px]">add</span>
+                        <span>دورة جديدة</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">قيد المراجعة</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="4">0</span>
+                        <span class="text-warning font-bold text-xs">+2 اليوم</span>
+                    </div>
+                </div>
+                <div class="bg-surface-container p-3 sm:p-5 rounded-xl border border-border-light shadow-sm dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-text-secondary dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.1em]">إجمالي الدورات</span>
+                    <div class="flex items-baseline justify-between mt-2 sm:mt-3">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white counter-number" data-target="28">0</span>
+                        <span class="text-success font-bold text-xs">نشطة</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h3 class="text-lg font-extrabold text-primary dark:text-white uppercase tracking-tight">الطلبات الأخيرة</h3>
+                    <a class="text-accent-blue hover:underline text-xs font-black uppercase tracking-wider cursor-pointer" onclick="showToast('info', 'جميع الطلبات', 'سيتم عرض جميع الطلبات قريباً')">عرض الكل</a>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-surface-container rounded-xl border border-border-light shadow-sm p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all dark:bg-slate-800 dark:border-slate-700">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div class="flex gap-3 sm:gap-4 min-w-0">
+                                <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-success/10 text-success flex items-center justify-center shrink-0 border border-success/20">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">verified</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="text-sm sm:text-base font-extrabold text-primary dark:text-white leading-tight truncate">سلامة النظافة 101</h4>
+                                    <p class="text-[10px] font-bold text-text-secondary dark:text-slate-400 mt-1 uppercase tracking-wide truncate">#8821 • طاقم عام</p>
+                                </div>
+                            </div>
+                            <span class="status-pill flex-shrink-0">معتمد</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between pt-3 sm:pt-4 border-t border-border-light/50 dark:border-slate-700 gap-2">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold text-text-secondary dark:text-slate-400">
+                                <span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                <span>24 أكتوبر 2023</span>
+                            </div>
+                            <button class="text-text-secondary dark:text-slate-500 hover:text-primary dark:hover:text-white transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">more_horiz</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-container rounded-xl border border-border-light shadow-sm p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all dark:bg-slate-800 dark:border-slate-700">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div class="flex gap-3 sm:gap-4 min-w-0">
+                                <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-accent-blue/10 text-accent-blue flex items-center justify-center shrink-0 border border-accent-blue/20">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">hourglass_top</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="text-sm sm:text-base font-extrabold text-primary dark:text-white leading-tight truncate">بروتوكول خصوصية المريض</h4>
+                                    <p class="text-[10px] font-bold text-text-secondary dark:text-slate-400 mt-1 uppercase tracking-wide truncate">#8819 • تمريض</p>
+                                </div>
+                            </div>
+                            <span class="status-pill status-pending flex-shrink-0">قيد الانتظار</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between pt-3 sm:pt-4 border-t border-border-light/50 dark:border-slate-700 gap-2">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold text-text-secondary dark:text-slate-400">
+                                <span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                <span>22 أكتوبر 2023</span>
+                            </div>
+                            <button class="text-text-secondary dark:text-slate-500 hover:text-primary dark:hover:text-white transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">more_horiz</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-container rounded-xl border border-border-light shadow-sm p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 hover:border-accent-blue/30 transition-all dark:bg-slate-800 dark:border-slate-700">
+                        <div class="flex flex-wrap justify-between items-start gap-2">
+                            <div class="flex gap-3 sm:gap-4 min-w-0">
+                                <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-slate-50 text-text-secondary flex items-center justify-center shrink-0 border border-slate-200 dark:bg-slate-700 dark:border-slate-600">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">edit_square</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <h4 class="text-sm sm:text-base font-extrabold text-primary dark:text-white leading-tight truncate">جدولة المناوبات v2</h4>
+                                    <p class="text-[10px] font-bold text-text-secondary dark:text-slate-400 mt-1 uppercase tracking-wide truncate">#8815 • إدارة</p>
+                                </div>
+                            </div>
+                            <span class="status-pill status-draft flex-shrink-0">مسودة</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between pt-3 sm:pt-4 border-t border-border-light/50 dark:border-slate-700 gap-2">
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold text-text-secondary dark:text-slate-400">
+                                <span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                                <span>20 أكتوبر 2023</span>
+                            </div>
+                            <button class="text-accent-blue text-[11px] font-black uppercase tracking-tighter hover:underline">استكمال التحرير</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: EDUCATION (التعليم الطبي) -->
+        <!-- ========================================================== -->
+        <section id="page-education" class="page">
+            <div class="pt-4 pb-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">بوابة التعليم الطبي</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">اختر خدمة من الخدمات المتاحة</p>
+            </div>
+
+            <div class="relative bg-primary rounded-3xl pt-12 pb-16 px-6 my-6 overflow-hidden shadow-xl dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900">
+                <div class="absolute top-0 right-0 -mt-12 -mr-12 w-64 h-64 bg-accent-blue/20 rounded-full opacity-30 blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-48 h-48 bg-accent-gold/20 rounded-full opacity-20 blur-2xl animate-pulse" style="animation-delay: 1s;"></div>
+                <div class="relative flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/20 transition-transform duration-500 hover:scale-110">
+                        <span class="material-symbols-outlined text-white text-4xl">local_hospital</span>
+                    </div>
+                    <h1 class="text-white text-2xl font-extrabold tracking-tight mb-2">بوابة التعليم الطبي</h1>
+                    <p class="text-slate-300 font-medium text-sm">مرحباً بعودتك. يرجى اختيار الخدمة المناسبة.</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center justify-between transition-all active:scale-[0.97] hover:border-accent-blue/30 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50" onclick="navigateTo('evaluation')">
+                    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-slate-50 dark:bg-slate-700 text-primary dark:text-white flex items-center justify-center border border-border-light dark:border-slate-600 flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl sm:text-[28px]">assignment</span>
+                        </div>
+                        <div class="text-right min-w-0">
+                            <h3 class="text-primary dark:text-white font-bold text-base sm:text-lg truncate">تقييم دورة</h3>
+                            <p class="text-text-secondary dark:text-slate-400 text-xs sm:text-sm font-medium truncate">تقديم ملاحظات على الدورة</p>
+                        </div>
+                    </div>
+                    <div class="h-8 w-8 rounded-full flex items-center justify-center bg-slate-50 dark:bg-slate-700 flex-shrink-0">
+                        <span class="material-symbols-outlined text-text-secondary dark:text-slate-400">chevron_left</span>
+                    </div>
+                </button>
+
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center justify-between transition-all active:scale-[0.97] hover:border-accent-blue/30 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50" onclick="navigateTo('sp-request')">
+                    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-slate-50 dark:bg-slate-700 text-primary dark:text-white flex items-center justify-center border border-border-light dark:border-slate-600 flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl sm:text-[28px]">groups</span>
+                        </div>
+                        <div class="text-right min-w-0">
+                            <h3 class="text-primary dark:text-white font-bold text-base sm:text-lg truncate">طلب مريض قياسي</h3>
+                            <p class="text-text-secondary dark:text-slate-400 text-xs sm:text-sm font-medium truncate">حجز مرضى قياسيين</p>
+                        </div>
+                    </div>
+                    <div class="h-8 w-8 rounded-full flex items-center justify-center bg-slate-50 dark:bg-slate-700 flex-shrink-0">
+                        <span class="material-symbols-outlined text-text-secondary dark:text-slate-400">chevron_left</span>
+                    </div>
+                </button>
+
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center justify-between transition-all active:scale-[0.97] hover:border-accent-blue/30 hover:shadow-lg hover:shadow-slate-200/50 dark:hover:shadow-slate-800/50" onclick="navigateTo('contact')">
+                    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-slate-50 dark:bg-slate-700 text-primary dark:text-white flex items-center justify-center border border-border-light dark:border-slate-600 flex-shrink-0">
+                            <span class="material-symbols-outlined text-2xl sm:text-[28px]">mail</span>
+                        </div>
+                        <div class="text-right min-w-0">
+                            <h3 class="text-primary dark:text-white font-bold text-base sm:text-lg truncate">إرسال استفسار</h3>
+                            <p class="text-text-secondary dark:text-slate-400 text-xs sm:text-sm font-medium truncate">التواصل مع فريق الدعم</p>
+                        </div>
+                    </div>
+                    <div class="h-8 w-8 rounded-full flex items-center justify-center bg-slate-50 dark:bg-slate-700 flex-shrink-0">
+                        <span class="material-symbols-outlined text-text-secondary dark:text-slate-400">chevron_left</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="mt-6 p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-border-light dark:border-slate-700">
+                <div class="flex items-start gap-4">
+                    <div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm flex-shrink-0">
+                        <span class="material-symbols-outlined text-primary dark:text-white text-xl">info</span>
+                    </div>
+                    <div class="min-w-0">
+                        <h4 class="text-sm font-bold text-primary dark:text-white uppercase tracking-wider">تحديث النظام</h4>
+                        <p class="text-sm text-text-secondary dark:text-slate-400 mt-1 leading-relaxed">صيانة مجدولة يوم السبت من 10 مساءً حتى 2 صباحاً بتوقيت شرق الولايات المتحدة.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <p class="text-[13px] font-semibold text-text-secondary dark:text-slate-400 uppercase tracking-widest text-center mb-4">وصول أعضاء هيئة التدريس</p>
+                <button class="w-full flex items-center justify-center gap-3 bg-primary text-white font-bold text-sm py-4 px-6 rounded-xl hover:bg-slate-800 transition-colors shadow-lg shadow-primary/10 dark:bg-accent-blue dark:hover:bg-blue-700 ripple" onclick="navigateTo('login')">
+                    <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+                    تسجيل الدخول للموظفين والإداريين
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: SERVICES (الخدمات العامة) -->
+        <!-- ========================================================== -->
+        <section id="page-services" class="page">
+            <div class="pt-4 pb-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">الخدمات العامة</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">نماذج الطلبات والتقييمات</p>
+            </div>
+
+            <div class="space-y-4 mt-6">
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 hover:shadow-md transition-all text-right group" onclick="navigateTo('evaluation')">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-accent-blue/10 text-accent-blue flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-2xl">assignment_turned_in</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-extrabold text-primary dark:text-white text-sm sm:text-base truncate">تقييم الدورة</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">قدم ملاحظاتك على الدورات التدريبية الأخيرة</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </button>
+
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 hover:shadow-md transition-all text-right group" onclick="navigateTo('sp-request')">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 dark:bg-emerald-900/30 dark:text-emerald-400">
+                        <span class="material-symbols-outlined text-2xl">folder_open</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-extrabold text-primary dark:text-white text-sm sm:text-base truncate">طلب مريض قياسي</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">تقديم طلبات جديدة أو تتبع الطلبات الحالية</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </button>
+
+                <button class="w-full bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-xl border border-border-light dark:border-slate-700 flex items-center gap-3 sm:gap-4 hover:border-accent-blue/30 hover:shadow-md transition-all text-right group" onclick="navigateTo('contact')">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 dark:bg-purple-900/30 dark:text-purple-400">
+                        <span class="material-symbols-outlined text-2xl">headset_mic</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-extrabold text-primary dark:text-white text-sm sm:text-base truncate">اتصل بالدعم</p>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 truncate">احصل على مساعدة فورية في المشكلات التقنية</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-secondary dark:text-slate-500 group-hover:translate-x-1 transition-transform flex-shrink-0">chevron_left</span>
+                </button>
+            </div>
+
+            <div class="mt-6 p-4 sm:p-5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-border-light dark:border-slate-700">
+                <h3 class="text-xs font-extrabold text-primary dark:text-white mb-3 flex items-center gap-2 uppercase tracking-wider">
+                    <span class="material-symbols-outlined text-accent-blue text-lg">info</span>
+                    إشعارات النظام
+                </h3>
+                <div class="flex gap-4 items-start">
+                    <div class="w-2 h-2 rounded-full bg-warning mt-1.5 shrink-0 animate-pulse"></div>
+                    <p class="text-sm text-text-secondary dark:text-slate-400 font-medium leading-relaxed">
+                        صيانة النظام مجدولة يوم <span class="font-extrabold text-primary dark:text-white">السبت، 12:00 صباحاً - 4:00 صباحاً</span>. قد تكون بعض الخدمات غير متاحة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: EVALUATION (تقييم الدورة) -->
+        <!-- ========================================================== -->
+        <section id="page-evaluation" class="page">
+            <div class="pt-4 pb-2">
+                <button onclick="navigateTo('services')" class="flex items-center gap-1 text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors mb-3">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                    <span class="font-bold text-sm">العودة</span>
+                </button>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">تقييم الدورة</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">قدم ملاحظاتك على الدورات التدريبية</p>
+            </div>
+
+            <div class="flex items-center justify-center gap-2 py-2 px-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full w-fit mx-auto my-4">
+                <span class="material-symbols-outlined text-accent-blue text-lg filled">lock</span>
+                <p class="text-accent-blue text-xs font-bold uppercase tracking-wider">مجهول وآمن</p>
+            </div>
+
+            <form class="space-y-6 mt-4" onsubmit="event.preventDefault(); showToast('success', '✓ تم الإرسال!', 'تم إرسال التقييم بنجاح');">
+                <div>
+                    <label class="block mb-2 text-sm font-bold text-primary dark:text-white tracking-tight">اختر الدورة</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">search</span>
+                        </span>
+                        <select class="input-field appearance-none bg-surface dark:bg-slate-800 border border-border-light dark:border-slate-700 pr-12 pl-4 py-3.5 text-primary dark:text-white">
+                            <option disabled selected value="">ابحث عن دورة...</option>
+                            <option value="nur101">NUR101 - مقدمة في التمريض</option>
+                            <option value="med202">MED202 - الممارسات السريرية</option>
+                            <option value="phm303">PHM303 - أساسيات علم الأدوية</option>
+                            <option value="eth404">ETH404 - أخلاقيات الرعاية الصحية</option>
+                        </select>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400 pointer-events-none">
+                            <span class="material-symbols-outlined text-xl">expand_more</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block mb-3 text-sm font-bold text-primary dark:text-white tracking-tight">السنة الدراسية</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input class="peer sr-only" name="year" type="radio" value="2023" />
+                            <div class="flex items-center justify-center py-3 px-2 sm:px-4 rounded border border-border-light dark:border-slate-700 bg-surface dark:bg-slate-800 text-text-secondary dark:text-slate-400 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary dark:peer-checked:bg-accent-blue transition-all font-bold text-sm">
+                                2023
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input checked class="peer sr-only" name="year" type="radio" value="2024" />
+                            <div class="flex items-center justify-center py-3 px-2 sm:px-4 rounded border border-border-light dark:border-slate-700 bg-surface dark:bg-slate-800 text-text-secondary dark:text-slate-400 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary dark:peer-checked:bg-accent-blue transition-all font-bold text-sm">
+                                2024
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input class="peer sr-only" name="year" type="radio" value="2025" />
+                            <div class="flex items-center justify-center py-3 px-2 sm:px-4 rounded border border-border-light dark:border-slate-700 bg-surface dark:bg-slate-800 text-text-secondary dark:text-slate-400 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary dark:peer-checked:bg-accent-blue transition-all font-bold text-sm">
+                                2025
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block mb-4 text-sm font-bold text-primary dark:text-white tracking-tight">التجربة العامة</label>
+                    <div class="flex items-center justify-between gap-1 sm:gap-2">
+                        <button type="button" class="group flex flex-col items-center gap-1 focus:outline-none" onclick="rateStar(this, 1)">
+                            <span class="material-symbols-outlined text-2xl sm:text-3xl text-warning group-hover:scale-110 transition-transform filled">star</span>
+                            <span class="text-[9px] font-bold text-text-secondary dark:text-slate-400 uppercase tracking-widest hidden xs:block">ضعيف</span>
+                        </button>
+                        <button type="button" class="group flex flex-col items-center gap-1 focus:outline-none" onclick="rateStar(this, 2)">
+                            <span class="material-symbols-outlined text-2xl sm:text-3xl text-warning group-hover:scale-110 transition-transform filled">star</span>
+                            <span class="text-[9px] font-bold text-text-secondary dark:text-slate-400 uppercase tracking-widest hidden xs:block">مقبول</span>
+                        </button>
+                        <button type="button" class="group flex flex-col items-center gap-1 focus:outline-none" onclick="rateStar(this, 3)">
+                            <span class="material-symbols-outlined text-2xl sm:text-3xl text-warning group-hover:scale-110 transition-transform filled">star</span>
+                            <span class="text-[9px] font-bold text-text-secondary dark:text-slate-400 uppercase tracking-widest hidden xs:block">جيد</span>
+                        </button>
+                        <button type="button" class="group flex flex-col items-center gap-1 focus:outline-none" onclick="rateStar(this, 4)">
+                            <span class="material-symbols-outlined text-2xl sm:text-3xl text-slate-200 dark:text-slate-600 group-hover:text-warning transition-colors">star</span>
+                            <span class="text-[9px] font-bold text-text-secondary dark:text-slate-400 uppercase tracking-widest hidden xs:block">ممتاز</span>
+                        </button>
+                        <button type="button" class="group flex flex-col items-center gap-1 focus:outline-none" onclick="rateStar(this, 5)">
+                            <span class="material-symbols-outlined text-2xl sm:text-3xl text-slate-200 dark:text-slate-600 group-hover:text-warning transition-colors">star</span>
+                            <span class="text-[9px] font-bold text-text-secondary dark:text-slate-400 uppercase tracking-widest hidden xs:block">متميز</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block mb-2 text-sm font-bold text-primary dark:text-white tracking-tight" for="feedback">
+                        تعليقات إضافية <span class="text-text-secondary dark:text-slate-400 font-normal mr-1">(اختياري)</span>
+                    </label>
+                    <textarea class="input-field bg-surface dark:bg-slate-800 border border-border-light dark:border-slate-700 p-4 min-h-[120px] resize-none" id="feedback" placeholder="شارك تفاصيل عن تجربة التعلم، المدرب، أو مادة الدورة..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-primary hover:bg-slate-800 text-white font-extrabold py-4 rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-sm dark:bg-accent-blue dark:hover:bg-blue-700 ripple">
+                    <span>إرسال التقييم</span>
+                    <span class="material-symbols-outlined text-xl">send</span>
+                </button>
+                <p class="text-center text-[10px] text-text-secondary dark:text-slate-400 font-medium">
+                    بالضغط على إرسال، فإنك توافق على <a class="underline hover:text-primary dark:hover:text-white text-primary dark:text-accent-blue font-bold" href="#">شروط الخدمة</a>. لا يتم تخزين أي بيانات شخصية.
+                </p>
+            </form>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: SP-REQUEST (طلب مريض قياسي) -->
+        <!-- ========================================================== -->
+        <section id="page-sp-request" class="page">
+            <div class="pt-4 pb-2">
+                <button onclick="navigateTo('services')" class="flex items-center gap-1 text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors mb-3">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                    <span class="font-bold text-sm">العودة</span>
+                </button>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">طلب مريض قياسي</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">احجز مرضى قياسيين للتدريب</p>
+            </div>
+
+            <div class="mt-4 mb-6">
+                <div class="flex flex-wrap justify-between items-center mb-1.5 gap-1">
+                    <span class="text-[11px] font-bold text-primary dark:text-white tracking-widest uppercase">الخطوة 1 من 2</span>
+                    <span class="text-[11px] font-semibold text-text-secondary dark:text-slate-400">50% مكتمل</span>
+                </div>
+                <div class="h-1 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div class="h-full bg-accent-blue rounded-full progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+
+            <form class="space-y-6" onsubmit="event.preventDefault(); showToast('success', '✓ تم الإرسال!', 'تم إرسال طلب المريض القياسي بنجاح');">
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="sp-name">اسم مقدم الطلب</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">person</span>
+                        </span>
+                        <input class="input-field pr-12 dark:bg-slate-800 dark:border-slate-700 dark:text-white" id="sp-name" placeholder="أحمد محمد" type="text" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="sp-email">البريد الإلكتروني</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">mail</span>
+                        </span>
+                        <input class="input-field pr-12 dark:bg-slate-800 dark:border-slate-700 dark:text-white" id="sp-email" placeholder="ahmed@university.edu" type="email" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="sp-date">تاريخ الفعالية</label>
+                        <div class="relative">
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400 pointer-events-none">
+                                <span class="material-symbols-outlined text-xl">calendar_today</span>
+                            </span>
+                            <input class="input-field pr-12 dark:bg-slate-800 dark:border-slate-700 dark:text-white" id="sp-date" type="date" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="sp-qty">عدد المرضى</label>
+                        <div class="flex items-center border border-border-light dark:border-slate-700 rounded bg-white dark:bg-slate-800 h-[48px]">
+                            <button type="button" class="w-12 h-full flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-700 text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors active:bg-slate-100 dark:active:bg-slate-600" onclick="adjustQuantity(this, -1)">
+                                <span class="material-symbols-outlined text-xl">remove</span>
+                            </button>
+                            <input class="w-full text-center border-none bg-transparent p-0 focus:ring-0 text-primary dark:text-white font-bold text-sm" id="sp-qty" min="1" type="number" value="1" />
+                            <button type="button" class="w-12 h-full flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-700 text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors active:bg-slate-100 dark:active:bg-slate-600" onclick="adjustQuantity(this, 1)">
+                                <span class="material-symbols-outlined text-xl">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex flex-wrap justify-between items-center mb-2 gap-1">
+                        <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider" for="sp-req">المتطلبات</label>
+                        <span class="text-[10px] font-semibold text-text-secondary dark:text-slate-400 uppercase tracking-tight">الحد الأقصى 500 حرف</span>
+                    </div>
+                    <textarea class="input-field border border-border-light dark:border-slate-700 p-4 min-h-[120px] resize-none dark:bg-slate-800 dark:text-white" id="sp-req" placeholder="وصف الفئة العمرية، الحالات المحددة، أو احتياجات السيناريو..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-primary hover:bg-slate-800 text-white font-extrabold py-4 rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3 uppercase tracking-wider text-sm dark:bg-accent-blue dark:hover:bg-blue-700 ripple">
+                    <span>إرسال الطلب</span>
+                    <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: CONTACT (اتصل بالدعم) -->
+        <!-- ========================================================== -->
+        <section id="page-contact" class="page">
+            <div class="pt-4 pb-2">
+                <button onclick="navigateTo('services')" class="flex items-center gap-1 text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors mb-3">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                    <span class="font-bold text-sm">العودة</span>
+                </button>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary dark:text-white tracking-tight">اتصل بالدعم</h2>
+                <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">نحن هنا لمساعدتك</p>
+            </div>
+
+            <p class="text-text-secondary dark:text-slate-400 text-sm leading-relaxed mt-2">
+                يسعدنا مساعدتك والإجابة على أي سؤال لديك. املأ النموذج أدناه وسنرد عليك خلال 24 ساعة.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                <div class="bg-surface-container dark:bg-slate-800 rounded-xl border border-border-light dark:border-slate-700 p-5 shadow-sm metric-card">
+                    <div class="bg-primary/5 dark:bg-accent-blue/20 text-primary dark:text-accent-blue w-fit p-2 rounded-lg">
+                        <span class="material-symbols-outlined text-2xl">schedule</span>
+                    </div>
+                    <h3 class="text-primary dark:text-white text-sm font-extrabold uppercase tracking-wider mt-3">ساعات العمل</h3>
+                    <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">الإثنين - الجمعة<br />9 صباحاً - 5 مساءً</p>
+                </div>
+                <div class="bg-surface-container dark:bg-slate-800 rounded-xl border border-border-light dark:border-slate-700 p-5 shadow-sm metric-card">
+                    <div class="bg-primary/5 dark:bg-accent-blue/20 text-primary dark:text-accent-blue w-fit p-2 rounded-lg">
+                        <span class="material-symbols-outlined text-2xl">call</span>
+                    </div>
+                    <h3 class="text-primary dark:text-white text-sm font-extrabold uppercase tracking-wider mt-3">خط مباشر</h3>
+                    <p class="text-text-secondary dark:text-slate-400 text-sm font-medium">1-800-HEALTH<br />فريق الدعم</p>
+                </div>
+            </div>
+
+            <form class="space-y-5" onsubmit="event.preventDefault(); showToast('success', '✓ تم الإرسال!', 'تم إرسال استفسارك بنجاح. سنتواصل معك قريباً.');">
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="contact-name">الاسم</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">person</span>
+                        </span>
+                        <input class="input-field pr-12 dark:bg-slate-800 dark:border-slate-700 dark:text-white" id="contact-name" placeholder="أحمد محمد" type="text" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="contact-email">البريد الإلكتروني</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">mail</span>
+                        </span>
+                        <input class="input-field pr-12 dark:bg-slate-800 dark:border-slate-700 dark:text-white" id="contact-email" placeholder="ahmed@example.com" type="email" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="contact-subject">الموضوع</label>
+                    <div class="relative">
+                        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400">
+                            <span class="material-symbols-outlined text-xl">topic</span>
+                        </span>
+                        <select class="input-field appearance-none pr-12 pl-10 py-3.5 bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-white">
+                            <option disabled selected value="">اختر موضوعاً</option>
+                            <option value="general">استفسار عام</option>
+                            <option value="appointment">المواعيد</option>
+                            <option value="billing">الفواتير والتأمين</option>
+                            <option value="tech">الدعم الفني</option>
+                        </select>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary dark:text-slate-400 pointer-events-none">
+                            <span class="material-symbols-outlined text-xl">expand_more</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-primary dark:text-white uppercase tracking-wider block mb-2" for="contact-msg">الرسالة</label>
+                    <textarea class="input-field border border-border-light dark:border-slate-700 p-4 min-h-[130px] resize-none dark:bg-slate-800 dark:text-white" id="contact-msg" placeholder="كيف يمكننا مساعدتك اليوم؟"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-primary hover:bg-slate-800 text-white font-extrabold py-4 rounded-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-3 dark:bg-accent-blue dark:hover:bg-blue-700 ripple">
+                    <span class="uppercase tracking-widest text-sm">إرسال الاستفسار</span>
+                    <span class="material-symbols-outlined text-xl">send</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- ========================================================== -->
+        <!-- PAGE: LOGIN (تسجيل الدخول) -->
+        <!-- ========================================================== -->
+        <section id="page-login" class="page">
+            <div class="min-h-[80vh] flex flex-col items-center justify-center py-8">
+                <div class="mb-8 flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-accent-blue/20 rounded-xl flex items-center justify-center mb-4 text-primary dark:text-accent-blue">
+                        <span class="material-symbols-outlined text-4xl">medical_services</span>
+                    </div>
+                    <h1 class="text-2xl font-bold tracking-tight text-primary dark:text-white">Cresent</h1>
+                    <p class="text-text-secondary dark:text-slate-400 text-sm mt-1">منصة الرعاية الصحية المتكاملة</p>
+                </div>
+
+                <div class="w-full max-w-md bg-surface-container dark:bg-slate-800 rounded-xl border border-border-light dark:border-slate-700 shadow-sm overflow-hidden">
+                    <div class="p-6 sm:p-8">
+                        <div class="text-center mb-6">
+                            <h2 class="text-xl font-bold text-primary dark:text-white">وصول الموظفين</h2>
+                            <p class="text-text-secondary dark:text-slate-400 text-sm mt-1">تسجيل الدخول إلى لوحة التحكم الآمنة</p>
+                        </div>
+                        <form class="space-y-5" onsubmit="event.preventDefault(); navigateTo('dashboard'); showToast('success', 'مرحباً بعودتك!', 'تم تسجيل الدخول بنجاح');">
+                            <div>
+                                <label class="text-sm font-medium text-primary dark:text-white block mb-1.5" for="login-user">رقم الموظف أو اسم المستخدم</label>
+                                <div class="relative">
+                                    <input class="input-field pr-11 bg-slate-50 dark:bg-slate-700 border-border-light dark:border-slate-600 dark:text-white" id="login-user" placeholder="مثال: STF-8821" type="text" />
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-text-secondary dark:text-slate-400">
+                                        <span class="material-symbols-outlined text-xl">person</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                                    <label class="text-sm font-medium text-primary dark:text-white" for="login-pass">كلمة المرور</label>
+                                    <a class="text-sm font-medium text-accent-blue hover:underline" href="#">نسيت كلمة المرور؟</a>
+                                </div>
+                                <div class="relative">
+                                    <input class="input-field pr-11 bg-slate-50 dark:bg-slate-700 border-border-light dark:border-slate-600 dark:text-white" id="login-pass" placeholder="أدخل كلمة المرور" type="password" />
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-text-secondary dark:text-slate-400">
+                                        <span class="material-symbols-outlined text-xl">lock</span>
+                                    </div>
+                                    <button class="absolute inset-y-0 left-0 pl-3 flex items-center text-text-secondary dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" type="button" onclick="togglePasswordVisibility(this)">
+                                        <span class="material-symbols-outlined text-xl">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full bg-primary hover:bg-slate-800 text-white font-bold py-3.5 rounded-lg shadow-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] dark:bg-accent-blue dark:hover:bg-blue-700 ripple">
+                                <span>تسجيل الدخول</span>
+                                <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 px-6 py-4 border-t border-border-light dark:border-slate-700 flex flex-wrap items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-text-secondary dark:text-slate-400 text-lg">verified_user</span>
+                        <p class="text-xs text-text-secondary dark:text-slate-400 font-bold uppercase tracking-wider">اتصال آمن 256-bit SSL</p>
+                    </div>
+                </div>
+
+                <button class="flex items-center gap-2 text-primary dark:text-accent-blue font-bold text-sm mt-6 hover:opacity-80 transition-opacity" onclick="showToast('info', 'قيد التطوير', 'ميزة Face ID قادمة قريباً')">
+                    <span class="material-symbols-outlined text-2xl">face</span>
+                    <span>تسجيل الدخول باستخدام Face ID</span>
+                </button>
+
+                <div class="mt-8 text-center">
+                    <p class="text-xs text-text-secondary dark:text-slate-400">© 2024 Cresent Health Systems. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- BOTTOM NAVIGATION BAR -->
+    <!-- ============================================================ -->
+    <nav class="fixed bottom-0 left-0 w-full bg-surface-container/90 backdrop-blur-xl border-t border-border-light z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] dark:bg-slate-800/90 dark:border-slate-700 transition-colors duration-300 safe-bottom">
+        <div class="flex justify-around items-center h-20 px-2 max-w-md mx-auto">
+            <div class="nav-btn active-nav" data-page="home" onclick="navigateTo('home')">
+                <div class="nav-icon">
+                    <span class="material-symbols-outlined text-2xl">home</span>
+                </div>
+                <span class="nav-label">الرئيسية</span>
+            </div>
+            <div class="nav-btn" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <div class="nav-icon">
+                    <span class="material-symbols-outlined text-2xl">dashboard</span>
+                </div>
+                <span class="nav-label">لوحة التحكم</span>
+            </div>
+            <div class="nav-btn" data-page="services" onclick="navigateTo('services')">
+                <div class="nav-icon">
+                    <span class="material-symbols-outlined text-2xl">assignment_add</span>
+                </div>
+                <span class="nav-label">الخدمات</span>
+            </div>
+            <div class="nav-btn" data-page="education" onclick="navigateTo('education')">
+                <div class="nav-icon">
+                    <span class="material-symbols-outlined text-2xl">school</span>
+                </div>
+                <span class="nav-label">التعليم</span>
+            </div>
+            <div class="nav-btn" data-page="profile" onclick="navigateTo('profile')">
+                <div class="nav-icon">
+                    <span class="material-symbols-outlined text-2xl">person</span>
+                </div>
+                <span class="nav-label">الملف</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================================ -->
+    <script>
+        // =============================================================
+        // NAVIGATION
+        // =============================================================
+        const pages = {
+            home: document.getElementById('page-home'),
+            dashboard: document.getElementById('page-dashboard'),
+            staff: document.getElementById('page-staff'),
+            education: document.getElementById('page-education'),
+            services: document.getElementById('page-services'),
+            evaluation: document.getElementById('page-evaluation'),
+            'sp-request': document.getElementById('page-sp-request'),
+            contact: document.getElementById('page-contact'),
+            login: document.getElementById('page-login'),
+            profile: document.getElementById('page-home')
+        };
+
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        function navigateTo(pageId) {
+            Object.values(pages).forEach(p => {
+                if (p) p.classList.remove('active');
+            });
+
+            const target = pages[pageId];
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(startCounters, 300);
+            }
+
+            navBtns.forEach(btn => {
+                btn.classList.remove('active-nav');
+                const btnPage = btn.getAttribute('data-page');
+                if (btnPage === pageId) {
+                    btn.classList.add('active-nav');
+                }
+                if (pageId === 'profile' && btnPage === 'home') {
+                    btn.classList.add('active-nav');
+                }
+            });
+
+            if (pageId !== 'home') {
+                history.pushState(null, '', '#' + pageId);
+            } else {
+                history.pushState(null, '', '#');
+            }
+
+            closeSidebar();
+        }
+
+        // =============================================================
+        // SIDEBAR
+        // =============================================================
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        });
+
+        // =============================================================
+        // HANDLE BACK BUTTON / URL HASH
+        // =============================================================
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && pages[hash]) {
+                navigateTo(hash);
+            } else {
+                navigateTo('home');
+            }
+        });
+
+        // =============================================================
+        // INIT
+        // =============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && pages[hash]) {
+                navigateTo(hash);
+            } else {
+                navigateTo('home');
+            }
+            setTimeout(startCounters, 500);
+            setTimeout(() => {
+                showToast('info', 'مرحباً بك في كريسينت!', 'منصة متكاملة للخدمات الصحية');
+            }, 1000);
+        });
+
+        // =============================================================
+        // COUNTER ANIMATION
+        // =============================================================
+        function startCounters() {
+            document.querySelectorAll('.counter-number').forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                if (isNaN(target)) return;
+                const isFloat = target % 1 !== 0;
+                const duration = 1500;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = eased * target;
+
+                    if (isFloat) {
+                        counter.textContent = current.toFixed(1);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = isFloat ? target.toFixed(1) : target;
+                    }
+                }
+                requestAnimationFrame(updateCounter);
+            });
+        }
+
+        // =============================================================
+        // TOAST NOTIFICATIONS
+        // =============================================================
+        function showToast(type, title, message) {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toast.className = 'toast glass-card rounded-xl p-4 shadow-2xl';
+            if (type === 'success') {
+                toast.classList.add('toast-success');
+                toastTitle.textContent = title || '✓ نجاح!';
+            } else if (type === 'warning') {
+                toast.classList.add('toast-warning');
+                toastTitle.textContent = title || '⚠ تنبيه';
+            } else {
+                toast.classList.add('toast-info');
+                toastTitle.textContent = title || 'ℹ معلومات';
+            }
+            toastMessage.textContent = message || '';
+
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        function hideToast() {
+            document.getElementById('toast').classList.remove('show');
+        }
+
+        // =============================================================
+        // THEME TOGGLE
+        // =============================================================
+        let isDark = false;
+
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            isDark = !isDark;
+            document.body.classList.toggle('dark', isDark);
+            const icon = document.getElementById('themeIcon');
+            icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            showToast('info', isDark ? '🌙 الوضع الليلي' : '☀️ الوضع النهاري', isDark ? 'تم تفعيل الوضع المظلم' :
+                'تم تفعيل الوضع المضيء');
+        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            isDark = true;
+            document.body.classList.add('dark');
+            document.getElementById('themeIcon').textContent = 'light_mode';
+        }
+
+        // =============================================================
+        // STAR RATING
+        // =============================================================
+        function rateStar(element, rating) {
+            const parent = element.closest('.flex.items-center');
+            if (!parent) return;
+            const stars = parent.querySelectorAll('.group');
+            stars.forEach((star, index) => {
+                const icon = star.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    if (index < rating) {
+                        icon.classList.add('text-warning');
+                        icon.classList.remove('text-slate-200', 'dark:text-slate-600');
+                    } else {
+                        icon.classList.remove('text-warning');
+                        icon.classList.add('text-slate-200', 'dark:text-slate-600');
+                    }
+                }
+            });
+        }
+
+        // =============================================================
+        // QUANTITY ADJUSTER
+        // =============================================================
+        function adjustQuantity(element, delta) {
+            const container = element.closest('.flex');
+            if (!container) return;
+            const input = container.querySelector('input[type="number"]');
+            if (!input) return;
+            let val = parseInt(input.value) || 1;
+            val = Math.max(1, val + delta);
+            input.value = val;
+        }
+
+        // =============================================================
+        // PASSWORD VISIBILITY TOGGLE
+        // =============================================================
+        function togglePasswordVisibility(button) {
+            const container = button.closest('.relative');
+            if (!container) return;
+            const input = container.querySelector('input');
+            if (!input) return;
+            input.type = input.type === 'password' ? 'text' : 'password';
+            const icon = button.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';
+            }
+        }
+
+        // =============================================================
+        // MICRO-INTERACTIONS
+        // =============================================================
+        document.querySelectorAll('.glass-card, .bg-surface-container.rounded-xl, .bg-white.rounded-xl').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        document.querySelectorAll('.text-accent-blue.text-xs.font-bold.hover\\:underline').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('info', 'جميع العناصر', 'سيتم عرض جميع العناصر قريباً');
+            });
+        });
+
+        console.log('✅ Cresent - جميع الصفحات مرتبطة وتعمل بشكل كامل!');
+        console.log('📱 متجاوب بالكامل مع جميع أحجام الشاشات');
+        console.log('🌟 المميزات: Dark Mode، عدادات متحركة، إشعارات، تأثيرات متقدمة');
+    </script>
+
+</body>
+</html>

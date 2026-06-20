@@ -1,0 +1,321 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Refresh.ai - مواقع الموزع الذكي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Kufi+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-fixed-dim": "#98da27",
+                    "surface-variant": "#e0e3e5",
+                    "secondary": "#006591",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-fixed": "#ffddb8",
+                    "primary-container": "#a3e635",
+                    "on-secondary-fixed": "#001e2f",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#805000",
+                    "on-surface-variant": "#424936",
+                    "on-primary-fixed-variant": "#334f00",
+                    "inverse-primary": "#98da27",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary": "#855300",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "on-primary-container": "#416400",
+                    "surface-container": "#eceef0",
+                    "tertiary-container": "#ffc989",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-container": "#004666",
+                    "on-primary-fixed": "#121f00",
+                    "secondary-container": "#39b8fd",
+                    "outline-variant": "#c2cab0",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed": "#c9e6ff",
+                    "outline": "#727a64",
+                    "surface-dim": "#d8dadc",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#2a1700",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "surface": "#f7f9fb",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#446900",
+                    "primary-fixed": "#b2f746",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "primary": "#446900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "stack-sm": "4px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "stack-md": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Noto Kufi Arabic", "Plus Jakarta Sans"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "headline-lg": ["Noto Kufi Arabic", "Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Noto Kufi Arabic", "Plus Jakarta Sans"],
+                    "display-lg": ["Noto Kufi Arabic", "Plus Jakarta Sans"],
+                    "label-md": ["Inter", "sans-serif"],
+                    "caption": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Kufi Arabic', sans-serif;
+            background-color: #f7f9fb;
+            overflow: hidden; /* For map layout */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .map-gradient-overlay {
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+        /* Bottom Sheet Animation */
+        #bottom-sheet {
+            transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .marker-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(163, 230, 53, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(163, 230, 53, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(163, 230, 53, 0); }
+        }
+    </style>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#a3e635">
+<style id="refresh-ai-utility-fixes">
+  .px-margin-mobile{padding-left:16px;padding-right:16px}
+  .px-gutter{padding-left:24px;padding-right:24px}
+  .py-base{padding-top:8px;padding-bottom:8px}
+  .max-w-container-max{max-width:1280px}
+  .text-caption{font-size:.75rem;line-height:1rem}
+  .text-label-md{font-size:.875rem;line-height:1.25rem}
+  .text-body-md{font-size:1rem;line-height:1.5rem}
+  .text-body-lg{font-size:1.125rem;line-height:1.75rem}
+  .text-headline-md{font-size:1.25rem;line-height:1.75rem}
+  .text-headline-lg{font-size:1.5rem;line-height:2rem}
+  .text-display-lg-mobile{font-size:2.25rem;line-height:2.5rem}
+  .text-display-lg{font-size:3.5rem;line-height:1}
+  .font-caption{font-family:Inter,'Noto Sans Arabic',sans-serif}
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  .line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  @media (min-width:768px){
+    .md\:px-margin-desktop{padding-left:40px;padding-right:40px}
+    .md\:text-display-lg{font-size:3.5rem;line-height:1}
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top AppBar (from Shared Components) -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface-dim/60 backdrop-blur-xl border-b border-white/20 dark:border-white/10 shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<button class="transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-primary/10 rounded-full p-2">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Refresh.ai</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-primary/10 rounded-full p-2">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<!-- Map Canvas (Main Content) -->
+<main class="relative w-full h-screen pt-16 pb-20">
+<!-- Technical Dark Style Map Image -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A highly detailed technical dark mode map interface of a modern city center, Riyadh, showing sleek neon lines for roads and digital topology. The color palette is dominated by deep charcoal, navy blues, and glowing electric citrus accents for points of interest. The lighting is low-key with high-tech data visualization overlays and glowing interactive pins marking smart dispenser locations." data-location="Riyadh" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMLud9Xej-qbPokcdrgG1mxyn5IcSNR27LCHGqWDYKbXG1K9HHhhqHkiSj2F2STHejeiaP2GZLlhhEPLckduk0QofYAZHK2yHANvTCsZk2GVuhGtZcy2zAjyzYDPXLPREIznx6V4n4vNBCJWhY5aZz_xvrNAZ_OR5AAakkBrIm2v03FOLs0IGRITBd04oEwY1qohr17NsJTud05Gdz9imozDC9OPidcsmsAtDeI6prMXyK4A5yxKIfIWMSouTliRjIy0UbkA-aih2u')"></div>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+</div>
+<!-- Floating Interactive Markers (Simulated) -->
+<div class="absolute top-[40%] left-[30%] z-10">
+<div class="relative flex flex-col items-center group cursor-pointer" onclick="toggleSheet()">
+<div class="bg-primary-container text-on-primary-container p-3 rounded-full shadow-lg marker-pulse border-2 border-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div class="mt-2 glass-card px-3 py-1 rounded-full text-label-md font-label-md shadow-sm">
+                    250 متر
+                </div>
+</div>
+</div>
+<div class="absolute top-[25%] right-[20%] z-10 opacity-60">
+<div class="bg-surface-container-high text-on-surface-variant p-2 rounded-full shadow-md">
+<span class="material-symbols-outlined">water_drop</span>
+</div>
+</div>
+<!-- Search & Filters Overlay -->
+<div class="absolute top-20 left-1/2 -translate-x-1/2 z-20 w-[90%] max-w-md px-margin-mobile">
+<div class="glass-card rounded-full flex items-center px-4 py-2 shadow-lg">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface placeholder:text-on-surface-variant/50 text-right pr-2" placeholder="ابحث عن موزع قريب..." type="text">
+<span class="material-symbols-outlined text-primary">my_location</span>
+</div>
+<div class="flex gap-2 mt-4 overflow-x-auto no-scrollbar pb-2">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-full whitespace-nowrap text-label-md font-label-md shadow-sm">الكل</button>
+<button class="glass-card text-on-surface-variant px-4 py-1.5 rounded-full whitespace-nowrap text-label-md font-label-md">متاح حالياً</button>
+<button class="glass-card text-on-surface-variant px-4 py-1.5 rounded-full whitespace-nowrap text-label-md font-label-md">مشروبات طاقة</button>
+</div>
+</div>
+<!-- Bottom Sheet Details -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/90 backdrop-blur-3xl rounded-t-[32px] shadow-[0_-8px_30px_rgba(0,0,0,0.1)] border-t border-white/30 transform translate-y-[0%] transition-transform" id="bottom-sheet">
+<div class="w-full flex justify-center py-3">
+<div class="w-12 h-1.5 bg-outline-variant/30 rounded-full"></div>
+</div>
+<div class="px-gutter pb-32">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-primary text-label-md font-label-md uppercase tracking-wider">يعمل الآن</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">موزع "الواحة" الذكي</h2>
+<p class="text-on-surface-variant flex items-center gap-1 font-body-md text-body-md">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            شارع العليا، 250 متر بعيداً عنك
+                        </p>
+</div>
+<div class="bg-secondary-container/20 p-3 rounded-2xl">
+<span class="material-symbols-outlined text-secondary text-3xl">route</span>
+</div>
+</div>
+<!-- Bento Grid Details -->
+<div class="grid grid-cols-2 gap-3 mb-6">
+<!-- Status Card -->
+<div class="glass-card p-4 rounded-3xl flex flex-col justify-between h-32 border-primary-container/20">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<div>
+<p class="text-caption text-on-surface-variant">الجهد الكهربائي</p>
+<p class="text-headline-md font-headline-md text-on-surface">مستقر</p>
+</div>
+</div>
+<!-- Temperature Card -->
+<div class="glass-card p-4 rounded-3xl flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-secondary">ac_unit</span>
+<div>
+<p class="text-caption text-on-surface-variant">الحرارة</p>
+<p class="text-headline-md font-headline-md text-on-surface">3° مئوية</p>
+</div>
+</div>
+</div>
+<!-- Available Drinks -->
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">المشروبات المتوفرة</h3>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<!-- Product 1 -->
+<a href="product-details.html" class="min-w-[140px] glass-card p-3 rounded-3xl text-center relative overflow-hidden group block"><div class="absolute top-0 right-0 p-2 opacity-10"><span class="material-symbols-outlined text-primary scale-150">water_drop</span></div><div class="h-24 flex items-center justify-center mb-2"><img class="h-full object-contain transform group-hover:scale-110 transition-transform" data-alt="A premium 3D render of a futuristic sports water bottle with condensation droplets, glowing liquid inside an electric lime green color, studio lighting, professional product photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtc6FcMZ5RYneypduFcbuDaBPHv28m8XlyxVM8m8dHcKmHf6ZKTSwDEwIKBXSdJSuxFFSPka5kclXFeB1r-JnK541s2NetcD2hMdZ8v00gcMjzXsLL9-YPA407iUKFCcJz0Tjez3tHHC6xhHnw6UklX-T1Huz1x0ZFrL1CTtoH0aWHt4d-A3DLXj3Lo81bFuzp71Jzo_Miu2bKGt-xMjZarkfJLxCkkRusmc7kjijKJM-WDFEZLS6PcIZTjR6SVP3xQJk975r7oPUI"></div><p class="text-label-md font-label-md text-on-surface">انتعاش الليمون</p><p class="text-caption text-primary">85% متوفر</p></a>
+<!-- Product 2 -->
+<a href="product-details.html" class="min-w-[140px] glass-card p-3 rounded-3xl text-center relative overflow-hidden group block"><div class="h-24 flex items-center justify-center mb-2"><img class="h-full object-contain transform group-hover:scale-110 transition-transform" data-alt="A sleek minimalist electrolyte drink bottle in a blue semi-transparent casing, crisp lighting with subtle shadows, 8k resolution, high-end commercial aesthetic for a hydration brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwT7qB73Vchiah8kEfqX5ZN2N0nt4W_Mx4pG8wcLNktg3-AIigTK7V_IzcmhAqotOP2CuWKr2DVsiiH0xKBkC7sQJtT6TG8jpCj8owZ-1GBZ0cYTrRQ4bH-KmGko9AxrMswVsXwQFjxBfUp5zf86gFRfMFR7DjFmezxCMroJkKPfDQxmpfKB0txYoV3vvvl_-gG1vDSOmqVCGv048Hn0dB-jtMpjX1QH3gTXd8uCd_SnCHZ5FXjIoiDzBFgAW1kNbSWNP26KvL7f81"></div><p class="text-label-md font-label-md text-on-surface">توت بري أزرق</p><p class="text-caption text-secondary">60% متوفر</p></a>
+<!-- Product 3 -->
+<a href="product-details.html" class="min-w-[140px] glass-card p-3 rounded-3xl text-center relative overflow-hidden group block"><div class="h-24 flex items-center justify-center mb-2"><img class="h-full object-contain transform group-hover:scale-110 transition-transform" data-alt="A vitamin-infused water bottle design, vibrant orange and yellow colors, hyper-realistic condensation, modern clean look, professional beverage advertising style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdZQi0wjWRpNPaAX15J5Xt2ybsUyOwu34C6jSoBEkKXuvdwu1XhfOWTHw4_vTavjvzI4A_csSIJRLkW1Ac4eqAw63i-O_3CAPwcCOwXaLeCuhU8-p9M49L2JnDuFxFxhibZlkVmQvAAN9zQZE3WZ2iSsEWo6N_nh9ghuiNncstzrLj2Beq6yfGRPz2s5S_vgTAYwdPImZccygJ0iJ51a0smRBI127dQwe2yKbzdFT8Itl1qc7Qhje27ylKEFyfvWjbcPz9iJGGIuy6"></div><p class="text-label-md font-label-md text-on-surface">فيتامين ج</p><p class="text-caption text-tertiary">متوفر قريباً</p></a>
+</div>
+<!-- CTA Button -->
+<button class="w-full mt-8 bg-primary text-on-primary font-headline-md text-headline-md py-4 rounded-full shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                    امسح للبدء بالتعبئة
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (from Shared Components) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/70 backdrop-blur-2xl border-t border-white/20 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-xl flex justify-around items-center py-base px-gutter">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="index.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/80 text-on-primary-container rounded-full px-4 py-1.5 backdrop-blur-md transition-transform duration-200 active:scale-90" href="smart-dispenser.html">
+<span class="material-symbols-outlined" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="orders.html">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="profile.html">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        let isSheetOpen = true;
+        const sheet = document.getElementById('bottom-sheet');
+        
+        function toggleSheet() {
+            if (isSheetOpen) {
+                sheet.style.transform = 'translateY(80%)';
+            } else {
+                sheet.style.transform = 'translateY(0%)';
+            }
+            isSheetOpen = !isSheetOpen;
+        }
+
+        // Add some basic touch dragging for the bottom sheet
+        let startY;
+        sheet.addEventListener('touchstart', e => {
+            startY = e.touches[0].clientY;
+        });
+
+        sheet.addEventListener('touchmove', e => {
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchY - startY;
+            if (deltaY > 0) {
+                sheet.style.transform = `translateY(${deltaY}px)`;
+            }
+        });
+
+        sheet.addEventListener('touchend', e => {
+            const touchY = e.changedTouches[0].clientY;
+            const deltaY = touchY - startY;
+            if (deltaY > 100) {
+                sheet.style.transform = 'translateY(80%)';
+                isSheetOpen = false;
+            } else {
+                sheet.style.transform = 'translateY(0%)';
+                isSheetOpen = true;
+            }
+        });
+    </script>
+
+
+</body></html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>الملف الشخصي والانتعاش | Refresh.ai</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-fixed-dim": "#98da27",
+                    "surface-variant": "#e0e3e5",
+                    "secondary": "#006591",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-fixed": "#ffddb8",
+                    "primary-container": "#a3e635",
+                    "on-secondary-fixed": "#001e2f",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#805000",
+                    "on-surface-variant": "#424936",
+                    "on-primary-fixed-variant": "#334f00",
+                    "inverse-primary": "#98da27",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary": "#855300",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2d3133",
+                    "on-background": "#191c1e",
+                    "on-primary-container": "#416400",
+                    "surface-container": "#eceef0",
+                    "tertiary-container": "#ffc989",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-container": "#004666",
+                    "on-primary-fixed": "#121f00",
+                    "secondary-container": "#39b8fd",
+                    "outline-variant": "#c2cab0",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed": "#c9e6ff",
+                    "outline": "#727a64",
+                    "surface-dim": "#d8dadc",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#2a1700",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "surface": "#f7f9fb",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#446900",
+                    "primary-fixed": "#b2f746",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "primary": "#446900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "stack-sm": "4px",
+                    "stack-lg": "24px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "stack-md": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "body-md": ["Noto Sans Arabic", "Inter"],
+                    "body-lg": ["Noto Sans Arabic", "Inter"],
+                    "headline-lg": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "display-lg": ["Noto Sans Arabic", "Plus Jakarta Sans"],
+                    "label-md": ["Noto Sans Arabic", "Inter"],
+                    "caption": ["Noto Sans Arabic", "Inter"]
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            font-family: 'Noto Sans Arabic', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .loyalty-gradient {
+            background: linear-gradient(135deg, #446900 0%, #a3e635 100%);
+        }
+        .mesh-gradient {
+            background-color: #f7f9fb;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(163, 230, 53, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(57, 184, 253, 0.15) 0px, transparent 50%);
+        }
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .wave-bg {
+            animation: wave 15s linear infinite;
+        }
+    </style>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#a3e635">
+<style id="refresh-ai-utility-fixes">
+  .px-margin-mobile{padding-left:16px;padding-right:16px}
+  .px-gutter{padding-left:24px;padding-right:24px}
+  .py-base{padding-top:8px;padding-bottom:8px}
+  .max-w-container-max{max-width:1280px}
+  .text-caption{font-size:.75rem;line-height:1rem}
+  .text-label-md{font-size:.875rem;line-height:1.25rem}
+  .text-body-md{font-size:1rem;line-height:1.5rem}
+  .text-body-lg{font-size:1.125rem;line-height:1.75rem}
+  .text-headline-md{font-size:1.25rem;line-height:1.75rem}
+  .text-headline-lg{font-size:1.5rem;line-height:2rem}
+  .text-display-lg-mobile{font-size:2.25rem;line-height:2.5rem}
+  .text-display-lg{font-size:3.5rem;line-height:1}
+  .font-caption{font-family:Inter,'Noto Sans Arabic',sans-serif}
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  .line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  @media (min-width:768px){
+    .md\:px-margin-desktop{padding-left:40px;padding-right:40px}
+    .md\:text-display-lg{font-size:3.5rem;line-height:1}
+  }
+</style>
+</head>
+<body class="mesh-gradient min-h-screen pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-4 md:px-10 h-16">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary/10 rounded-full transition-all duration-300">menu</button>
+<span class="font-headline-md text-headline-md font-bold text-primary">Refresh.ai</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary/10 rounded-full transition-all duration-300">notifications</button>
+</div>
+</header>
+<main class="pt-20 px-4 md:px-10 max-w-7xl mx-auto space-y-8">
+<!-- Profile Header Section -->
+<section class="mt-4">
+<div class="glass-card rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl"></div>
+<!-- Avatar with Progress Ring -->
+<div class="relative">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full p-1.5 bg-gradient-to-tr from-primary to-secondary-container">
+<div class="w-full h-full rounded-full border-4 border-white overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a cheerful tech-savvy young man with a friendly smile, set against a clean, minimalist studio background with soft emerald and electric citrus lighting accents. The style is modern, high-definition photography with a slight glow that matches the digital refreshment brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMhXbDEakjrvnN8dVsU2g-fc-n3zD39J3-Cv63n01LCRSTaY9v_qvugAqIHYvIlsArDBbfwgQ3_60q2Vuz13e4RkEcIFIXq3mqNLhel9YZOI3HEHAM98fXv9hWH1SHB9ql4d_SBnPe0RPOJ3eF4AB0RBozPJQ13ylbrpadsGGaE31Xo2mhHwKbeKzvLHOunsDam8X5135HuvjWf57_s65IEJ4McmpKv30eObzcIu23GX-SFJNDyjYHYgnValBulNH9ExHB5V9LJwBC">
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-full border-4 border-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="text-center md:text-right flex-1 space-y-2">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">سلمان العمري</h1>
+<p class="font-body-md text-on-surface-variant">عضو النخبة • انضم منذ مارس ٢٠٢٤</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-2 mt-4">
+<span class="bg-primary-container/30 text-on-primary-container px-4 py-1 rounded-full text-label-md font-label-md border border-primary/20">مدمن ترطيب</span>
+<span class="bg-secondary-container/30 text-on-secondary-container px-4 py-1 rounded-full text-label-md font-label-md border border-secondary/20">صديق للبيئة</span>
+</div>
+</div>
+<!-- Loyalty Points Card -->
+<div class="loyalty-gradient w-full md:w-72 p-6 rounded-3xl text-white shadow-xl relative overflow-hidden transform transition-transform hover:scale-[1.02]">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-6xl">water_drop</span>
+</div>
+<p class="font-label-md opacity-90 mb-1">رصيد النقاط الحالي</p>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-bold">85</span>
+<span class="font-body-md">نقطة</span>
+</div>
+<div class="mt-6 space-y-2">
+<div class="flex justify-between text-caption">
+<span class="">المستوى التالي: 100</span>
+<span class="">تبقى 15 نقطة</span>
+</div>
+<div class="h-2 w-full bg-white/30 rounded-full overflow-hidden">
+<div class="h-full bg-white rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Analytics & Progress -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Daily Hydration Bento -->
+<div class="glass-card md:col-span-2 rounded-3xl p-6 relative overflow-hidden h-64">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                            ملخص النشاط الأسبوعي
+                        </h3>
+</div>
+<button class="text-primary font-label-md">التفاصيل</button>
+</div>
+<div class="flex items-end justify-between h-32 gap-2 mt-4">
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-xl transition-all duration-500 h-[60%] group-hover:h-[65%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">أحد</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-xl transition-all duration-500 h-[85%] group-hover:h-[90%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">اثنين</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-xl transition-all duration-500 h-[40%] group-hover:h-[45%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">ثلاثاء</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group border-2 border-primary-container">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-xl transition-all duration-500 h-[95%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption font-bold text-primary">اليوم</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/30 rounded-t-xl h-[0%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">خميس</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/30 rounded-t-xl h-[0%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">جمعة</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-xl relative group">
+<div class="absolute bottom-0 w-full bg-primary/30 rounded-t-xl h-[0%]"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-caption">سبت</span>
+</div>
+</div>
+</div>
+<!-- Achievement Card -->
+<div class="glass-card rounded-3xl p-6 flex flex-col justify-between border-primary/20 bg-primary/5">
+<div class="bg-primary/20 w-12 h-12 rounded-2xl flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface">بطل الانتعاش</h4>
+<p class="font-body-md text-on-surface-variant mt-2">لقد حافظت على رطوبتك لمدة ٧ أيام متتالية!</p>
+</div>
+<div class="mt-4 pt-4 border-t border-white/40 flex justify-between items-center">
+<span class="text-label-md text-primary">+50 نقطة إضافية</span>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+</div>
+</section>
+<!-- Rewards Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-lg text-on-surface">مكافآت الانتعاش</h2>
+<div class="flex gap-2">
+<button class="bg-surface-container rounded-full p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Reward 1 -->
+<div class="glass-card rounded-3xl p-4 flex flex-col gap-4 group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="h-48 w-full rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A sleek, futuristic reusable smart water bottle with a digital temperature display on the lid, set on a clean marble surface with refreshing water droplets. The background features a soft-focus tropical lush garden with morning sunlight. Digital hydration brand style, high-end commercial aesthetic, vibrant lime and azure tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg7CrUCsm9UgjhKh6BKAm1KARtEzqvBO-FZfn1h5jnseqWRCVT-qmuv2iSciMJAXoJezxln9qEkidJXOVDQYILcg4CtwDENMfICrKkK6HSyGm3Ue7ePUgmCqxN--AKj_75yUhWWahCbPU56_qeZxTpvos57_L1HmLnLSTxfmav9x8DDLCSpYhL_8qMnN-5yuzh-2uEWsSDrQr3VVcdn-WFYzckB1gi2hsEYzepNP0Z2leW00s5WHszAiOYJIcVJP1EzOawIbtra_R0">
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-primary font-bold text-label-md">
+                            250 نقطة
+                        </div>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-md text-on-surface">عبوة Refresh الذكية</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">عبوة بتقنية التنبيه الذكي والتحكم في درجة الحرارة.</p>
+<button class="w-full mt-4 py-3 bg-primary/10 text-primary border border-primary/20 rounded-2xl font-label-md transition-all group-hover:bg-primary group-hover:text-white" onclick="window.location.href='product-details.html'">استبدال النقاط</button>
+</div>
+</div>
+<!-- Reward 2 -->
+<div class="glass-card rounded-3xl p-4 flex flex-col gap-4 group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="h-48 w-full rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A vibrant collection of electrolyte-enhanced hydration pods with glowing colorful packaging, arranged artistically on a glass shelf. The lighting is neon-inspired with electric citrus and cool blue hues, simulating a high-tech lab or wellness lounge. Digital refreshment aesthetic, macro lens photography, crisp and refreshing mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFa1XaKESurHquRmz8X5Z5IOGLXAxsNKAu_449WNxSS0Ibq_7Uo30R9n6CJ2khonc-x5_oLCVZy0GePVQjUs3bAb36xsGeP5hzIMdLUgF3gvWfZiZAMxg99TgN6WBzc7CAlHPMU4-KqG-mJwseNrll-nTjC6VwuPj3YCGcP50eEyzCIvG96aarqjpqxbPIOP-rkBL62GwWJSzC4wxd0K_4nZ6LMsC-_hdXx2G37x-kJxIHO-xYp0wAfYEBvwpdAtJmsl9qXh0Yoysd">
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-primary font-bold text-label-md">
+                            50 نقطة
+                        </div>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-md text-on-surface">مجموعة نكهات الطاقة</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">٦ كبسولات من الإلكتروليتات بنكهة الحمضيات الكهربائية.</p>
+<button class="w-full mt-4 py-3 bg-primary text-white rounded-2xl font-label-md shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" onclick="window.location.href='product-details.html'">جاهز للاستبدال</button>
+</div>
+</div>
+<!-- Reward 3 -->
+<div class="glass-card rounded-3xl p-4 flex flex-col gap-4 group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="h-48 w-full rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A modern tech workspace featuring a laptop, a smartphone displaying a health app, and a glass of sparkling water with ice and mint. The scene is bright, optimistic, and ultra-clean, using a light-mode color palette of whites and soft greens. Professional lifestyle photography, serene atmosphere, corporate wellness theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSUiWHvCMGZK09o5eiZyNmXBXYlQBWAAPM2GnZLuIJJN1ufpiHDMIxKiF9kOdgFjoSUARL1zwyguqA2_La4gJkDN2dEDgyrVlsS2v2vDqfEhjAz6RB3wED4a-yImQ4y30rF_5hgWOh6Ub3FJh9meh_DSTx3Zecm9D-otmrWcUf-zwOt8bcZk5Myme8gbQD3wIyx9nDbzXrc1XjaYqVmsMkhersJ_LSdKmZTd0PSfX2_mZpwodC5lP9smO-1xQ-JLb3hlyxpYieVN5F">
+<div class="absolute top-3 left-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-primary font-bold text-label-md">
+                            120 نقطة
+                        </div>
+</div>
+<div class="px-2 pb-2">
+<h3 class="font-headline-md text-on-surface">اشتراك Refresh Pro</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2 mt-1">شهر مجاني من التحليلات المتقدمة وجدول الترطيب المخصص.</p>
+<button class="w-full mt-4 py-3 bg-primary/10 text-primary border border-primary/20 rounded-2xl font-label-md transition-all group-hover:bg-primary group-hover:text-white" onclick="window.location.href='product-details.html'">استبدال النقاط</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Profile Settings Links -->
+<section class="glass-card rounded-3xl p-2 mb-10 overflow-hidden">
+<div class="divide-y divide-white/20">
+<a class="flex items-center justify-between p-4 hover:bg-white/40 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">person_outline</span>
+</div>
+<span class="font-body-lg text-on-surface">إعدادات الحساب</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</a>
+<a class="flex items-center justify-between p-4 hover:bg-white/40 transition-colors" href="orders.html">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="font-body-lg text-on-surface">سجل النقاط والمشتريات</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</a>
+<a class="flex items-center justify-between p-4 hover:bg-white/40 transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">security</span>
+</div>
+<span class="font-body-lg text-on-surface">الخصوصية والأمان</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</a>
+<a class="flex items-center justify-between p-4 hover:bg-error/10 text-error transition-colors" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<span class="font-body-lg">تسجيل الخروج</span>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-4 px-6 bg-surface/70 backdrop-blur-2xl border-t border-white/20 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-md font-label-md mt-1">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="smart-dispenser.html">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-label-md font-label-md mt-1">اكتشف</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 px-4 py-1.5 transition-transform duration-200 active:scale-90" href="orders.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-md font-label-md mt-1">المحفظة</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/80 text-on-primary-container rounded-full px-5 py-2 backdrop-blur-md transition-transform duration-200 active:scale-90 shadow-sm border border-primary/20" href="profile.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-label-md font-label-md mt-0.5">الملف</span>
+</a>
+</nav>
+<script>
+        // Smooth hover effect for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        
+        // Dynamic Greeting (Arabic)
+        const updateGreeting = () => {
+            const hour = new Date().getHours();
+            let greeting = "أهلاً بك";
+            if (hour < 12) greeting = "صباح الخير";
+            else if (hour < 18) greeting = "طاب يومك";
+            else greeting = "مساء الخير";
+            console.log(greeting + ", سلمان!");
+        };
+        updateGreeting();
+    </script>
+
+
+</body></html>
