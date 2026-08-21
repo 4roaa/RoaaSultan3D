@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="واجهة عربية توضيحية لنظام إعداد وجدولة رسائل البريد الإلكتروني.">
+  <meta name="author" content="Roaa Sultan Alqarni">
+  <title>تجربة نظام MailFlow | Roaa Sultan Alqarni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #f5f8fd;
+      --surface: #ffffff;
+      --surface-soft: #f8fbff;
+      --ink: #10213f;
+      --ink-soft: #53627a;
+      --ink-faint: #7b8aa2;
+      --line: #dce5f1;
+      --line-strong: #c8d6e8;
+      --blue: #1769e0;
+      --blue-dark: #0e55bf;
+      --blue-soft: #eaf3ff;
+      --cyan: #17a9d8;
+      --green: #178651;
+      --green-soft: #eaf8f0;
+      --red: #ce3b4f;
+      --red-soft: #fff0f2;
+      --purple: #7548d8;
+      --purple-soft: #f1edff;
+      --shadow: 0 14px 35px rgba(20, 50, 92, 0.08);
+      --shadow-soft: 0 7px 22px rgba(20, 50, 92, 0.06);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --transition: 180ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Tajawal", Tahoma, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    label[for="attachmentsInput"] {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [contenteditable="true"]:focus-visible,
+    label[for="attachmentsInput"]:focus-visible {
+      outline: 3px solid rgba(23, 105, 224, 0.2);
+      outline-offset: 2px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .topbar {
+      height: 68px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 4vw, 56px);
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #bdd5f6;
+      border-radius: 12px;
+      background: var(--blue-soft);
+    }
+
+    .brand-mark .icon {
+      width: 23px;
+      height: 23px;
+    }
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink-soft);
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #153e7c;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .ghost-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .ghost-icon:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .demo-cta {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 10px;
+      padding: 7px 13px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .demo-cta:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .page-shell {
+      width: min(1460px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+
+    .page-heading {
+      margin-bottom: 24px;
+    }
+
+    .page-heading h1 {
+      margin: 0 0 7px;
+      font-size: clamp(28px, 3.2vw, 42px);
+      line-height: 1.25;
+      letter-spacing: -0.8px;
+    }
+
+    .page-heading p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 16px;
+    }
+
+    .demo-notice {
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid #bad4f7;
+      border-radius: 13px;
+      padding: 12px 15px;
+      background: var(--blue-soft);
+      color: #244c81;
+      font-size: 13px;
+    }
+
+    .demo-notice .icon {
+      color: var(--blue);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 24px;
+      align-items: start;
+      direction: ltr;
+    }
+
+    .composer,
+    .summary-column {
+      direction: rtl;
+    }
+
+    .steps {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 20px;
+      direction: rtl;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 17px;
+      left: 11%;
+      right: 11%;
+      height: 2px;
+      background: #bdd5f6;
+      z-index: 0;
+    }
+
+    .step-button {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--ink-soft);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .step-number {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--blue);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--blue);
+      box-shadow: 0 0 0 5px var(--canvas);
+      transition: all var(--transition);
+    }
+
+    .step-button.active {
+      color: var(--blue);
+    }
+
+    .step-button.active .step-number {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 0 0 5px var(--canvas), 0 7px 16px rgba(23, 105, 224, 0.25);
+    }
+
+    .panel {
+      margin-bottom: 14px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px 10px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-title .icon {
+      color: var(--blue);
+    }
+
+    .panel-title h2,
+    .panel-title h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.15px;
+    }
+
+    .section-index {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .panel-body {
+      padding: 10px 22px 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 15px;
+    }
+
+    .field {
+      grid-column: span 4;
+      min-width: 0;
+    }
+
+    .field.span-6 {
+      grid-column: span 6;
+    }
+
+    .field.span-8 {
+      grid-column: span 8;
+    }
+
+    .field.span-12 {
+      grid-column: 1 / -1;
+    }
+
+    .field label,
+    .field-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #243752;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea,
+    .recipients-box {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 10px 12px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .field input:hover,
+    .field select:hover,
+    .field textarea:hover,
+    .recipients-box:hover {
+      border-color: #9fbbe2;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus,
+    .recipients-box:focus-within {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.1);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon .icon {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      color: var(--ink-faint);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .input-with-icon input,
+    .input-with-icon select {
+      padding-right: 40px;
+    }
+
+    .connection-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 15px;
+    }
+
+    .connection-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 4px var(--green-soft);
+    }
+
+    .text-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 7px 12px;
+      background: var(--surface);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .text-button:hover {
+      border-color: #9ab9e4;
+      background: var(--blue-soft);
+    }
+
+    .recipients-box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 6px 9px;
+    }
+
+    .recipient-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 29px;
+      border-radius: 8px;
+      padding: 4px 8px;
+      background: var(--blue-soft);
+      color: #1b4f91;
+      font-size: 12px;
+      direction: ltr;
+    }
+
+    .recipient-chip button {
+      width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #50709a;
+      cursor: pointer;
+    }
+
+    #recipientInput {
+      flex: 1 1 210px;
+      min-width: 160px;
+      min-height: 31px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--ink);
+      direction: ltr;
+      text-align: right;
+    }
+
+    .editor-shell {
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: var(--surface);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .editor-shell:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.1);
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3px;
+      min-height: 43px;
+      padding: 5px 8px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .tool-button {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #455975;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tool-button:hover,
+    .tool-button.active {
+      background: #e8f1fc;
+      color: var(--blue);
+    }
+
+    .toolbar-separator {
+      width: 1px;
+      height: 21px;
+      margin: 0 4px;
+      background: var(--line);
+    }
+
+    .message-editor {
+      min-height: 165px;
+      padding: 16px;
+      color: #253853;
+      line-height: 1.85;
+      outline: none;
+    }
+
+    .attachment-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 14px;
+      direction: ltr;
+    }
+
+    .dropzone,
+    .attachment-list {
+      direction: rtl;
+    }
+
+    .dropzone {
+      min-height: 128px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 7px;
+      border: 1.5px dashed #8eb6eb;
+      border-radius: 13px;
+      padding: 18px;
+      background: #fbfdff;
+      color: var(--blue);
+      text-align: center;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+
+    .dropzone:hover,
+    .dropzone.dragging {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      transform: translateY(-1px);
+    }
+
+    .dropzone .icon {
+      width: 31px;
+      height: 31px;
+    }
+
+    .dropzone strong {
+      font-size: 14px;
+    }
+
+    .dropzone small {
+      color: var(--ink-faint);
+      font-size: 11px;
+    }
+
+    #attachmentsInput {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    .attachment-list {
+      display: grid;
+      align-content: start;
+      gap: 9px;
+    }
+
+    .file-row {
+      min-height: 58px;
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr) auto 34px;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: var(--surface);
+    }
+
+    .file-type {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--red-soft);
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .file-type.sheet {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .file-name {
+      overflow: hidden;
+      color: #2a3b55;
+      font-size: 13px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-size {
+      color: var(--ink-faint);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .remove-file {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--red);
+      cursor: pointer;
+    }
+
+    .remove-file:hover {
+      background: var(--red-soft);
+    }
+
+    .schedule-grid .field {
+      grid-column: span 3;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 7px;
+    }
+
+    .actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform var(--transition), background var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      min-width: 190px;
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 9px 20px rgba(23, 105, 224, 0.24);
+    }
+
+    .button.primary:hover {
+      background: var(--blue-dark);
+      box-shadow: 0 12px 24px rgba(23, 105, 224, 0.3);
+    }
+
+    .button.secondary {
+      border-color: #a9c2e6;
+      background: var(--surface);
+      color: var(--blue);
+    }
+
+    .button.secondary:hover {
+      background: var(--blue-soft);
+    }
+
+    .prototype-note {
+      color: var(--ink-faint);
+      font-size: 12px;
+    }
+
+    .credit {
+      margin-top: 22px;
+      color: var(--ink-faint);
+      direction: ltr;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .credit a {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .credit a:hover {
+      text-decoration: underline;
+    }
+
+    .summary-column {
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-card,
+    .recent-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card {
+      margin-bottom: 16px;
+      padding: 20px;
+    }
+
+    .summary-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .summary-heading h2,
+    .recent-card h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .summary-heading .icon {
+      color: var(--blue);
+    }
+
+    .summary-items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .summary-item {
+      display: grid;
+      grid-template-columns: 43px minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      min-height: 71px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 10px;
+      background: var(--surface);
+    }
+
+    .summary-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .summary-icon.cyan {
+      background: #e7f9fe;
+      color: var(--cyan);
+    }
+
+    .summary-icon.green {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .summary-icon.purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .summary-label {
+      color: var(--ink-faint);
+      font-size: 11px;
+    }
+
+    .summary-value {
+      margin-top: 2px;
+      color: #223550;
+      font-size: 13px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .ready-state {
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid #aadbbb;
+      border-radius: 13px;
+      padding: 12px;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .ready-state strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .ready-state span {
+      display: block;
+      margin-top: 1px;
+      font-size: 11px;
+    }
+
+    .recent-card {
+      padding: 18px 16px 12px;
+    }
+
+    .recent-card h2 {
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    th,
+    td {
+      padding: 9px 7px;
+      border-bottom: 1px solid #e8eef6;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th {
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    td {
+      color: #2d405c;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      border-radius: 999px;
+      padding: 3px 7px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .status.sent {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .recent-link {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 0;
+      padding: 12px 4px 3px;
+      background: transparent;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      z-index: 100;
+      min-width: min(420px, calc(100% - 36px));
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border: 1px solid #a5d9b7;
+      border-radius: 14px;
+      padding: 13px 16px;
+      background: #f0fbf4;
+      color: var(--green);
+      box-shadow: 0 18px 50px rgba(17, 65, 38, 0.18);
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 18px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast.error {
+      border-color: #f0b8bf;
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    @media (max-width: 1140px) {
+      .workspace {
+        grid-template-columns: minmax(0, 1fr) 310px;
+      }
+
+      .field,
+      .schedule-grid .field {
+        grid-column: span 6;
+      }
+
+      .field.span-8 {
+        grid-column: span 12;
+      }
+
+      .attachment-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .page-shell {
+        width: min(100% - 28px, 740px);
+        padding-top: 26px;
+      }
+
+      .workspace {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .composer,
+      .summary-column {
+        width: 100%;
+      }
+
+      .summary-column {
+        position: static;
+      }
+
+      .summary-card {
+        order: 1;
+      }
+
+      .recent-card {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        height: 62px;
+        padding: 0 14px;
+      }
+
+      .brand {
+        font-size: 20px;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .user-area > span,
+      .ghost-icon.help {
+        display: none;
+      }
+
+      .demo-cta {
+        padding-inline: 10px;
+        font-size: 12px;
+      }
+
+      .page-heading p {
+        font-size: 14px;
+      }
+
+      .steps::before {
+        left: 10%;
+        right: 10%;
+      }
+
+      .step-button {
+        gap: 6px;
+        font-size: 10px;
+      }
+
+      .step-number {
+        width: 31px;
+        height: 31px;
+        box-shadow: 0 0 0 4px var(--canvas);
+      }
+
+      .panel-header {
+        padding: 16px 15px 8px;
+      }
+
+      .panel-body {
+        padding: 9px 15px 17px;
+      }
+
+      .field,
+      .field.span-6,
+      .field.span-8,
+      .schedule-grid .field {
+        grid-column: 1 / -1;
+      }
+
+      .file-row {
+        grid-template-columns: 34px minmax(0, 1fr) 31px;
+      }
+
+      .file-size {
+        display: none;
+      }
+
+      .actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .actions-group {
+        flex-direction: column;
+      }
+
+      .button,
+      .button.primary {
+        width: 100%;
+      }
+
+      .prototype-note {
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="MailFlow">
+      <span class="brand-mark" aria-hidden="true">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4.5 7 6.2 5a2 2 0 0 0 2.6 0l6.2-5"></path></svg>
+      </span>
+      <span>MailFlow</span>
+    </div>
+    <div class="user-area">
+      <button class="ghost-icon help" type="button" aria-label="المساعدة" title="هذه صفحة توضيحية فقط">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.8 9.2a2.4 2.4 0 1 1 3.8 2c-1 .7-1.6 1.2-1.6 2.3"></path><path d="M12 17h.01"></path></svg>
+      </button>
+      <button class="ghost-icon" type="button" aria-label="الإشعارات">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 8h18c0-1-3-1-3-8"></path><path d="M10 20h4"></path></svg>
+      </button>
+      <a class="demo-cta" href="mailto:Roaaasultan@gmail.com?subject=طلب شراء نظام MailFlow">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20 7 10 17l-5-5"></path></svg>
+        اطلب النظام
+      </a>
+      <span>Roaa Sultan Alqarni</span>
+      <span class="user-avatar" aria-hidden="true">R</span>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="page-heading">
+      <h1>إنشاء رسالة مجدولة</h1>
+      <p>أعدّي الرسالة ومرفقاتها، ثم حددي اليوم والتاريخ والوقت ليتم إرسالها تلقائيًا.</p>
+    </div>
+
+    <div class="demo-notice" role="note">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 10v6M12 7h.01"></path></svg>
+      <span><strong>نسخة تجريبية للعملاء:</strong> تحاكي إعداد البريد وإرفاق الملفات وجدولة الإرسال، دون اتصال فعلي بخادم البريد.</span>
+    </div>
+
+    <div class="workspace">
+      <section class="composer" aria-label="نموذج إعداد الرسالة">
+        <nav class="steps" aria-label="مراحل إعداد الرسالة">
+          <button class="step-button active" type="button" data-target="senderPanel">
+            <span class="step-number">1</span>
+            <span>إعداد المرسل</span>
+          </button>
+          <button class="step-button" type="button" data-target="contentPanel">
+            <span class="step-number">2</span>
+            <span>محتوى الرسالة</span>
+          </button>
+          <button class="step-button" type="button" data-target="attachmentsPanel">
+            <span class="step-number">3</span>
+            <span>المرفقات</span>
+          </button>
+          <button class="step-button" type="button" data-target="schedulePanel">
+            <span class="step-number">4</span>
+            <span>الجدولة</span>
+          </button>
+        </nav>
+
+        <section class="panel" id="senderPanel">
+          <header class="panel-header">
+            <div class="panel-title">
+              <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4.5 7 6.2 5a2 2 0 0 0 2.6 0l6.2-5"></path></svg>
+              <h2>إعداد المرسل</h2>
+            </div>
+            <span class="section-index">01</span>
+          </header>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field">
+                <label for="senderName">اسم المرسل</label>
+                <input id="senderName" type="text" value="شركة التقنية الحديثة" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="senderEmail">البريد الإلكتروني للمرسل</label>
+                <input id="senderEmail" type="email" value="no-reply@company.com" dir="ltr" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="smtpServer">خادم SMTP</label>
+                <input id="smtpServer" type="text" value="smtp.company.com" dir="ltr">
+              </div>
+              <div class="field span-6">
+                <label for="smtpPort">المنفذ والتشفير</label>
+                <div class="input-with-icon">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+                  <select id="smtpPort">
+                    <option>587 - STARTTLS</option>
+                    <option>465 - SSL/TLS</option>
+                    <option>25 - بدون تشفير</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field span-6">
+                <label for="appPassword">كلمة مرور التطبيق</label>
+                <input id="appPassword" type="password" value="demo-password" autocomplete="new-password">
+              </div>
+            </div>
+            <div class="connection-row">
+              <span class="connection-status" id="connectionStatus"><span class="status-dot"></span> تم التحقق من إعدادات الاتصال</span>
+              <button class="text-button" type="button" id="testConnection">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>
+                اختبار الاتصال
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="contentPanel">
+          <header class="panel-header">
+            <div class="panel-title">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path></svg>
+              <h2>محتوى الرسالة</h2>
+            </div>
+            <span class="section-index">02</span>
+          </header>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field span-12">
+                <span class="field-label">إلى (المستلمون)</span>
+                <div class="recipients-box" id="recipientsBox">
+                  <div id="recipientChips"></div>
+                  <input id="recipientInput" type="email" placeholder="اكتبي البريد ثم اضغطي Enter" aria-label="إضافة مستلم">
+                </div>
+              </div>
+              <div class="field span-12">
+                <label for="subject">الموضوع</label>
+                <input id="subject" type="text" value="تحديث مهم حول مشروع التحول الرقمي">
+              </div>
+              <div class="field span-12">
+                <span class="field-label">نص الرسالة</span>
+                <div class="editor-shell">
+                  <div class="editor-toolbar" role="toolbar" aria-label="تنسيق نص الرسالة">
+                    <button class="tool-button" type="button" data-command="bold" aria-label="عريض"><strong>B</strong></button>
+                    <button class="tool-button" type="button" data-command="italic" aria-label="مائل"><em>I</em></button>
+                    <button class="tool-button" type="button" data-command="underline" aria-label="تحته خط"><u>U</u></button>
+                    <span class="toolbar-separator"></span>
+                    <button class="tool-button" type="button" data-command="justifyRight" aria-label="محاذاة لليمين">≡</button>
+                    <button class="tool-button" type="button" data-command="insertUnorderedList" aria-label="قائمة نقطية">•≡</button>
+                    <button class="tool-button" type="button" data-command="createLink" aria-label="إضافة رابط">🔗</button>
+                  </div>
+                  <div class="message-editor" id="messageBody" contenteditable="true" role="textbox" aria-multiline="true">
+                    السلام عليكم ورحمة الله وبركاته،<br><br>
+                    نود إحاطتكم بأبرز التحديثات الجديدة ضمن مشروع التحول الرقمي، والتي تهدف إلى تحسين كفاءة العمل وتسهيل متابعة العمليات.<br><br>
+                    تجدون التفاصيل كاملة في المرفقات.<br><br>
+                    مع خالص التحية والتقدير.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="attachmentsPanel">
+          <header class="panel-header">
+            <div class="panel-title">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m21.4 11.6-8.9 8.9a6 6 0 0 1-8.5-8.5l9.6-9.6a4 4 0 0 1 5.7 5.7l-9.6 9.6a2 2 0 0 1-2.8-2.8l8.9-8.9"></path></svg>
+              <h2>المرفقات</h2>
+            </div>
+            <span class="section-index">03</span>
+          </header>
+          <div class="panel-body">
+            <div class="attachment-layout">
+              <label class="dropzone" id="dropzone" for="attachmentsInput" tabindex="0">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12"></path><path d="m7 8 5-5 5 5"></path><path d="M5 14a4 4 0 0 0 0 8h14a4 4 0 0 0 .6-8"></path></svg>
+                <strong>اسحبي الملفات هنا أو انقري للاختيار</strong>
+                <small>PDF، Word، Excel، صور - حتى 25 ميجابايت</small>
+              </label>
+              <input id="attachmentsInput" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg">
+              <div class="attachment-list" id="attachmentList" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="schedulePanel">
+          <header class="panel-header">
+            <div class="panel-title">
+              <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+              <h2>الجدولة</h2>
+            </div>
+            <span class="section-index">04</span>
+          </header>
+          <div class="panel-body">
+            <div class="form-grid schedule-grid">
+              <div class="field">
+                <label for="scheduleDay">اليوم</label>
+                <input id="scheduleDay" type="text" readonly>
+              </div>
+              <div class="field">
+                <label for="scheduleDate">التاريخ</label>
+                <div class="input-with-icon">
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+                  <input id="scheduleDate" type="date">
+                </div>
+              </div>
+              <div class="field">
+                <label for="scheduleTime">الوقت</label>
+                <div class="input-with-icon">
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                  <input id="scheduleTime" type="time" value="10:00">
+                </div>
+              </div>
+              <div class="field">
+                <label for="timezone">المنطقة الزمنية</label>
+                <select id="timezone">
+                  <option value="Asia/Riyadh">Asia/Riyadh - توقيت الرياض</option>
+                  <option value="Asia/Dubai">Asia/Dubai - توقيت دبي</option>
+                  <option value="UTC">UTC - التوقيت العالمي</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <div class="actions-group">
+            <button class="button primary" id="scheduleButton" type="button">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+              جدولة الإرسال
+            </button>
+            <button class="button secondary" id="draftButton" type="button">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v16l-8-5-8 5V5a1 1 0 0 1 1-1Z"></path></svg>
+              حفظ كمسودة
+            </button>
+          </div>
+          <span class="prototype-note">نسخة تجريبية للعملاء - لا يتم إرسال بريد فعلي</span>
+        </div>
+      </section>
+
+      <aside class="summary-column" aria-label="ملخص الرسالة">
+        <section class="summary-card">
+          <div class="summary-heading">
+            <h2>ملخص الرسالة</h2>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M9 13h6M9 17h6"></path></svg>
+          </div>
+          <div class="summary-items">
+            <div class="summary-item">
+              <span class="summary-icon">
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>
+              </span>
+              <div>
+                <div class="summary-label">المرسل</div>
+                <div class="summary-value" id="senderSummary"></div>
+              </div>
+            </div>
+            <div class="summary-item">
+              <span class="summary-icon cyan">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6M22 11h-6"></path></svg>
+              </span>
+              <div>
+                <div class="summary-label">المستلمون</div>
+                <div class="summary-value" id="recipientsSummary"></div>
+              </div>
+            </div>
+            <div class="summary-item">
+              <span class="summary-icon green">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m21.4 11.6-8.9 8.9a6 6 0 0 1-8.5-8.5l9.6-9.6a4 4 0 0 1 5.7 5.7l-9.6 9.6a2 2 0 0 1-2.8-2.8l8.9-8.9"></path></svg>
+              </span>
+              <div>
+                <div class="summary-label">المرفقات</div>
+                <div class="summary-value" id="attachmentsSummary"></div>
+              </div>
+            </div>
+            <div class="summary-item">
+              <span class="summary-icon purple">
+                <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"></path></svg>
+              </span>
+              <div>
+                <div class="summary-label">موعد الإرسال المجدول</div>
+                <div class="summary-value" id="scheduleSummary"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ready-state" id="readyState">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+            <div>
+              <strong>جاهز للجدولة</strong>
+              <span>تم استكمال المعلومات الأساسية للرسالة.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="recent-card">
+          <h2>أحدث الرسائل المجدولة</h2>
+          <div class="table-wrap">
+            <table aria-label="أحدث الرسائل المجدولة">
+              <thead>
+                <tr>
+                  <th>الموضوع</th>
+                  <th>موعد الإرسال</th>
+                  <th>الحالة</th>
+                </tr>
+              </thead>
+              <tbody id="recentTableBody">
+                <tr>
+                  <td>تقرير أداء الربع الأول</td>
+                  <td>24 أغسطس 10:00</td>
+                  <td><span class="status">مجدولة</span></td>
+                </tr>
+                <tr>
+                  <td>دعوة لحضور ورشة عمل</td>
+                  <td>22 أغسطس 14:30</td>
+                  <td><span class="status">مجدولة</span></td>
+                </tr>
+                <tr>
+                  <td>نشرة شهرية - أغسطس</td>
+                  <td>20 أغسطس 08:00</td>
+                  <td><span class="status sent">تم الإرسال</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="recent-link" type="button">عرض جميع الرسائل المجدولة</button>
+        </section>
+      </aside>
+    </div>
+    <footer class="credit">
+      Designed by Roaa Sultan Alqarni &nbsp;•&nbsp;
+      <a href="mailto:Roaaasultan@gmail.com">Roaaasultan@gmail.com</a>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+    <span id="toastMessage"></span>
+  </div>
+
+  <script>
+    const state = {
+      recipients: ["khalid@company.com", "sara@company.com", "team@company.com"],
+      attachments: [
+        { name: "تقرير_المشروع_الربع_الثاني.pdf", size: 2516582, type: "pdf" },
+        { name: "خطة_العمل_التفصيلية.xlsx", size: 1153434, type: "xlsx" }
+      ]
+    };
+
+    const elements = {
+      senderName: document.getElementById("senderName"),
+      senderEmail: document.getElementById("senderEmail"),
+      recipientInput: document.getElementById("recipientInput"),
+      recipientChips: document.getElementById("recipientChips"),
+      subject: document.getElementById("subject"),
+      messageBody: document.getElementById("messageBody"),
+      attachmentsInput: document.getElementById("attachmentsInput"),
+      attachmentList: document.getElementById("attachmentList"),
+      dropzone: document.getElementById("dropzone"),
+      scheduleDay: document.getElementById("scheduleDay"),
+      scheduleDate: document.getElementById("scheduleDate"),
+      scheduleTime: document.getElementById("scheduleTime"),
+      timezone: document.getElementById("timezone"),
+      senderSummary: document.getElementById("senderSummary"),
+      recipientsSummary: document.getElementById("recipientsSummary"),
+      attachmentsSummary: document.getElementById("attachmentsSummary"),
+      scheduleSummary: document.getElementById("scheduleSummary"),
+      readyState: document.getElementById("readyState"),
+      toast: document.getElementById("toast"),
+      toastMessage: document.getElementById("toastMessage"),
+      recentTableBody: document.getElementById("recentTableBody")
+    };
+
+    const arabicDays = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatBytes(bytes) {
+      if (!bytes) return "0 KB";
+      const units = ["B", "KB", "MB", "GB"];
+      const unitIndex = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+      const size = bytes / Math.pow(1024, unitIndex);
+      return `${size.toFixed(unitIndex > 1 ? 1 : 0)} ${units[unitIndex]}`;
+    }
+
+    function formatArabicDate(dateString) {
+      if (!dateString) return "لم يتم تحديد التاريخ";
+      const date = new Date(`${dateString}T12:00:00`);
+      return new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }).format(date);
+    }
+
+    function renderRecipients() {
+      elements.recipientChips.innerHTML = state.recipients.map((email, index) => `
+        <span class="recipient-chip">
+          ${escapeHtml(email)}
+          <button type="button" data-remove-recipient="${index}" aria-label="حذف ${escapeHtml(email)}">×</button>
+        </span>
+      `).join("");
+      updateSummary();
+    }
+
+    function addRecipient(rawValue) {
+      const emails = rawValue.split(/[،,;\s]+/).map(value => value.trim()).filter(Boolean);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const validEmails = emails.filter(email => emailPattern.test(email));
+      validEmails.forEach(email => {
+        if (!state.recipients.includes(email)) state.recipients.push(email);
+      });
+      elements.recipientInput.value = "";
+      renderRecipients();
+      if (emails.length && validEmails.length === 0) showToast("يرجى إدخال بريد إلكتروني صحيح.", true);
+    }
+
+    function renderAttachments() {
+      if (!state.attachments.length) {
+        elements.attachmentList.innerHTML = `
+          <div class="file-row" style="grid-template-columns:1fr;text-align:center;color:var(--ink-faint);">
+            لم تتم إضافة مرفقات بعد
+          </div>`;
+      } else {
+        elements.attachmentList.innerHTML = state.attachments.map((file, index) => {
+          const extension = file.name.split(".").pop().toLowerCase();
+          const sheet = ["xls", "xlsx", "csv"].includes(extension);
+          return `
+            <div class="file-row">
+              <span class="file-type ${sheet ? "sheet" : ""}">${escapeHtml(extension)}</span>
+              <span class="file-name" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</span>
+              <span class="file-size">${formatBytes(file.size)}</span>
+              <button class="remove-file" type="button" data-remove-file="${index}" aria-label="حذف ${escapeHtml(file.name)}">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6"></path></svg>
+              </button>
+            </div>`;
+        }).join("");
+      }
+      updateSummary();
+    }
+
+    function addFiles(fileList) {
+      Array.from(fileList).forEach(file => {
+        if (file.size <= 25 * 1024 * 1024) {
+          state.attachments.push({ name: file.name, size: file.size, type: file.type });
+        } else {
+          showToast(`الملف ${file.name} يتجاوز 25 ميجابايت.`, true);
+        }
+      });
+      renderAttachments();
+    }
+
+    function updateScheduleDay() {
+      if (!elements.scheduleDate.value) {
+        elements.scheduleDay.value = "";
+        return;
+      }
+      const date = new Date(`${elements.scheduleDate.value}T12:00:00`);
+      elements.scheduleDay.value = arabicDays[date.getDay()];
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const senderName = elements.senderName.value.trim() || "لم يُحدد اسم المرسل";
+      const senderEmail = elements.senderEmail.value.trim() || "لم يُحدد البريد";
+      elements.senderSummary.innerHTML = `${escapeHtml(senderName)}<br><span dir="ltr">${escapeHtml(senderEmail)}</span>`;
+      elements.recipientsSummary.textContent = `${state.recipients.length} ${state.recipients.length === 1 ? "مستلم" : "مستلمين"}`;
+      elements.attachmentsSummary.textContent = `${state.attachments.length} ${state.attachments.length === 1 ? "ملف" : "ملفات"}`;
+      const time = elements.scheduleTime.value || "--:--";
+      const zone = elements.timezone.value;
+      elements.scheduleSummary.innerHTML = `${formatArabicDate(elements.scheduleDate.value)}<br>${escapeHtml(time)} - <span dir="ltr">${escapeHtml(zone)}</span>`;
+    }
+
+    let toastTimer;
+    function showToast(message, isError = false) {
+      clearTimeout(toastTimer);
+      elements.toastMessage.textContent = message;
+      elements.toast.classList.toggle("error", isError);
+      elements.toast.classList.add("show");
+      toastTimer = setTimeout(() => elements.toast.classList.remove("show"), 3200);
+    }
+
+    function validateForm() {
+      const missing = [];
+      if (!elements.senderEmail.value.trim()) missing.push("بريد المرسل");
+      if (!state.recipients.length) missing.push("المستلمين");
+      if (!elements.subject.value.trim()) missing.push("موضوع الرسالة");
+      if (!elements.scheduleDate.value) missing.push("التاريخ");
+      if (!elements.scheduleTime.value) missing.push("الوقت");
+      return missing;
+    }
+
+    function scheduleEmail() {
+      const missing = validateForm();
+      if (missing.length) {
+        showToast(`يرجى استكمال: ${missing.join("، ")}.`, true);
+        return;
+      }
+
+      const formattedDate = new Intl.DateTimeFormat("ar-SA-u-ca-gregory", {
+        day: "numeric",
+        month: "short"
+      }).format(new Date(`${elements.scheduleDate.value}T12:00:00`));
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${escapeHtml(elements.subject.value.trim())}</td>
+        <td>${escapeHtml(formattedDate)} ${escapeHtml(elements.scheduleTime.value)}</td>
+        <td><span class="status">مجدولة</span></td>`;
+      elements.recentTableBody.prepend(row);
+      elements.readyState.querySelector("strong").textContent = "تمت الجدولة بنجاح";
+      elements.readyState.querySelector("span").textContent = "ستُرسل الرسالة تلقائيًا في الموعد المحدد.";
+      showToast("تمت جدولة الرسالة بنجاح - محاكاة للواجهة فقط.");
+    }
+
+    function setDefaultDate() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const year = tomorrow.getFullYear();
+      const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
+      const day = String(tomorrow.getDate()).padStart(2, "0");
+      elements.scheduleDate.value = `${year}-${month}-${day}`;
+      updateScheduleDay();
+    }
+
+    elements.recipientInput.addEventListener("keydown", event => {
+      if (["Enter", ",", ";"].includes(event.key)) {
+        event.preventDefault();
+        addRecipient(elements.recipientInput.value);
+      }
+    });
+
+    elements.recipientInput.addEventListener("blur", () => {
+      if (elements.recipientInput.value.trim()) addRecipient(elements.recipientInput.value);
+    });
+
+    elements.recipientChips.addEventListener("click", event => {
+      const button = event.target.closest("[data-remove-recipient]");
+      if (!button) return;
+      state.recipients.splice(Number(button.dataset.removeRecipient), 1);
+      renderRecipients();
+    });
+
+    elements.attachmentsInput.addEventListener("change", event => {
+      addFiles(event.target.files);
+      event.target.value = "";
+    });
+
+    elements.attachmentList.addEventListener("click", event => {
+      const button = event.target.closest("[data-remove-file]");
+      if (!button) return;
+      state.attachments.splice(Number(button.dataset.removeFile), 1);
+      renderAttachments();
+    });
+
+    ["dragenter", "dragover"].forEach(eventName => {
+      elements.dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        elements.dropzone.classList.add("dragging");
+      });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+      elements.dropzone.addEventListener(eventName, event => {
+        event.preventDefault();
+        elements.dropzone.classList.remove("dragging");
+      });
+    });
+
+    elements.dropzone.addEventListener("drop", event => addFiles(event.dataTransfer.files));
+    elements.dropzone.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        elements.attachmentsInput.click();
+      }
+    });
+
+    document.querySelectorAll(".tool-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const command = button.dataset.command;
+        if (command === "createLink") {
+          const url = window.prompt("أدخلي رابطًا:");
+          if (url) document.execCommand(command, false, url);
+        } else {
+          document.execCommand(command, false, null);
+        }
+        elements.messageBody.focus();
+      });
+    });
+
+    document.querySelectorAll(".step-button").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".step-button").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(button.dataset.target).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    [elements.senderName, elements.senderEmail, elements.scheduleDate, elements.scheduleTime, elements.timezone]
+      .forEach(element => element.addEventListener("input", () => {
+        if (element === elements.scheduleDate) updateScheduleDay();
+        updateSummary();
+      }));
+
+    document.getElementById("testConnection").addEventListener("click", event => {
+      const button = event.currentTarget;
+      button.disabled = true;
+      button.textContent = "جاري الاختبار...";
+      setTimeout(() => {
+        button.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg> تم الاتصال بنجاح';
+        button.disabled = false;
+        showToast("تم التحقق من إعدادات البريد بنجاح.");
+      }, 650);
+    });
+
+    document.getElementById("scheduleButton").addEventListener("click", scheduleEmail);
+    document.getElementById("draftButton").addEventListener("click", () => showToast("تم حفظ الرسالة كمسودة محلية."));
+
+    setDefaultDate();
+    renderRecipients();
+    renderAttachments();
+    updateSummary();
+  </script>
+</body>
+</html>
